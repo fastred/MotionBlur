@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MotionBlurredView.h
 //  AHKMotionBlur
 //
 //  Created by Arkadiusz on 01-07-14.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface MotionBlurredView : UIView
+
+- (void)enableMotionBlur;
 
 @end

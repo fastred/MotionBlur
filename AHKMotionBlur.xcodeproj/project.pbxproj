@@ -13,6 +13,7 @@
 		A6E3926619784EDC00C02D47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E3926419784EDC00C02D47 /* Main.storyboard */; };
 		A6E3926819784EDC00C02D47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E3926719784EDC00C02D47 /* Images.xcassets */; };
 		A6E3927419784EDC00C02D47 /* AHKMotionBlurTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3927319784EDC00C02D47 /* AHKMotionBlurTests.m */; };
+		A6E3927F19784F1400C02D47 /* MotionBlurredView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3927E19784F1400C02D47 /* MotionBlurredView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,8 @@
 		A6E3926D19784EDC00C02D47 /* AHKMotionBlurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AHKMotionBlurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E3927219784EDC00C02D47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6E3927319784EDC00C02D47 /* AHKMotionBlurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AHKMotionBlurTests.m; sourceTree = "<group>"; };
+		A6E3927D19784F1400C02D47 /* MotionBlurredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurredView.h; sourceTree = "<group>"; };
+		A6E3927E19784F1400C02D47 /* MotionBlurredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionBlurredView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,11 +84,13 @@
 			children = (
 				A6E3925E19784EDC00C02D47 /* AppDelegate.h */,
 				A6E3925F19784EDC00C02D47 /* AppDelegate.m */,
+				A6E3926719784EDC00C02D47 /* Images.xcassets */,
+				A6E3926419784EDC00C02D47 /* Main.storyboard */,
+				A6E3927D19784F1400C02D47 /* MotionBlurredView.h */,
+				A6E3927E19784F1400C02D47 /* MotionBlurredView.m */,
+				A6E3925A19784EDC00C02D47 /* Supporting Files */,
 				A6E3926119784EDC00C02D47 /* ViewController.h */,
 				A6E3926219784EDC00C02D47 /* ViewController.m */,
-				A6E3926419784EDC00C02D47 /* Main.storyboard */,
-				A6E3926719784EDC00C02D47 /* Images.xcassets */,
-				A6E3925A19784EDC00C02D47 /* Supporting Files */,
 			);
 			path = AHKMotionBlur;
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 				A6E3926319784EDC00C02D47 /* ViewController.m in Sources */,
 				A6E3926019784EDC00C02D47 /* AppDelegate.m in Sources */,
 				A6E3925D19784EDC00C02D47 /* main.m in Sources */,
+				A6E3927F19784F1400C02D47 /* MotionBlurredView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
