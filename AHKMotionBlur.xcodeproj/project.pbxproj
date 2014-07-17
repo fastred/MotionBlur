@@ -14,6 +14,8 @@
 		A6E3926819784EDC00C02D47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E3926719784EDC00C02D47 /* Images.xcassets */; };
 		A6E3927419784EDC00C02D47 /* AHKMotionBlurTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3927319784EDC00C02D47 /* AHKMotionBlurTests.m */; };
 		A6E3927F19784F1400C02D47 /* MotionBlurredView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3927E19784F1400C02D47 /* MotionBlurredView.m */; };
+		A6E3928219784FA800C02D47 /* MotionBlurFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3928119784FA800C02D47 /* MotionBlurFilter.m */; };
+		A6E392841978505800C02D47 /* MotionBlurKernelSource.txt in Resources */ = {isa = PBXBuildFile; fileRef = A6E392831978505800C02D47 /* MotionBlurKernelSource.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,9 @@
 		A6E3927319784EDC00C02D47 /* AHKMotionBlurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AHKMotionBlurTests.m; sourceTree = "<group>"; };
 		A6E3927D19784F1400C02D47 /* MotionBlurredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurredView.h; sourceTree = "<group>"; };
 		A6E3927E19784F1400C02D47 /* MotionBlurredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionBlurredView.m; sourceTree = "<group>"; };
+		A6E3928019784FA800C02D47 /* MotionBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurFilter.h; sourceTree = "<group>"; };
+		A6E3928119784FA800C02D47 /* MotionBlurFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionBlurFilter.m; sourceTree = "<group>"; };
+		A6E392831978505800C02D47 /* MotionBlurKernelSource.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MotionBlurKernelSource.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +91,9 @@
 				A6E3925F19784EDC00C02D47 /* AppDelegate.m */,
 				A6E3926719784EDC00C02D47 /* Images.xcassets */,
 				A6E3926419784EDC00C02D47 /* Main.storyboard */,
+				A6E3928019784FA800C02D47 /* MotionBlurFilter.h */,
+				A6E3928119784FA800C02D47 /* MotionBlurFilter.m */,
+				A6E392831978505800C02D47 /* MotionBlurKernelSource.txt */,
 				A6E3927D19784F1400C02D47 /* MotionBlurredView.h */,
 				A6E3927E19784F1400C02D47 /* MotionBlurredView.m */,
 				A6E3925A19784EDC00C02D47 /* Supporting Files */,
@@ -201,6 +209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6E392841978505800C02D47 /* MotionBlurKernelSource.txt in Resources */,
 				A6E3926619784EDC00C02D47 /* Main.storyboard in Resources */,
 				A6E3926819784EDC00C02D47 /* Images.xcassets in Resources */,
 			);
@@ -220,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6E3928219784FA800C02D47 /* MotionBlurFilter.m in Sources */,
 				A6E3926319784EDC00C02D47 /* ViewController.m in Sources */,
 				A6E3926019784EDC00C02D47 /* AppDelegate.m in Sources */,
 				A6E3925D19784EDC00C02D47 /* main.m in Sources */,
@@ -339,8 +349,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = AHKMotionBlur/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -350,8 +362,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = AHKMotionBlur/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -408,6 +422,7 @@
 				A6E3927919784EDC00C02D47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A6E3927A19784EDC00C02D47 /* Build configuration list for PBXNativeTarget "AHKMotionBlurTests" */ = {
 			isa = XCConfigurationList;
@@ -416,6 +431,7 @@
 				A6E3927C19784EDC00C02D47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

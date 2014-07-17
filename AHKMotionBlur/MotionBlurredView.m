@@ -7,6 +7,116 @@
 //
 
 #import "MotionBlurredView.h"
+#import "MotionBlurFilter.h"
+
+@interface MotionBlurredLayer()
+
+//@property (nonatomic, strong) UIImage *blurredImage;
+@property (nonatomic, weak) CALayer *blurLayer;
+@property (nonatomic, strong) CADisplayLink *displayLink;
+@property (nonatomic) CGPoint lastPosition;
+
+@end
+
+@implementation MotionBlurredLayer
+
+- (void)prepareBlur
+{
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);
+    CGContextRef graphicsContext = UIGraphicsGetCurrentContext();
+    CGContextFillRect(graphicsContext, self.bounds);
+
+    // good explanation of differences between drawViewHierarchyInRect:afterScreenUpdates: and renderInContext: https://github.com/radi/LiveFrost/issues/10#issuecomment-28959525
+    [self renderInContext:graphicsContext];
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        CIContext *context = [CIContext contextWithOptions:nil];               // 1
+        CIImage *inputImage = [CIImage imageWithCGImage:snapshotImage.CGImage];
+
+        MotionBlurFilter *adjustmentFilter = [[MotionBlurFilter alloc] init];
+        [adjustmentFilter setDefaults];
+        adjustmentFilter.inputImage = inputImage;
+
+        CIImage *outputImage = [adjustmentFilter valueForKey:@"outputImage"];
+
+        // back to UIImage
+        CGImageRef blurredImgRef = [context createCGImage:outputImage fromRect:outputImage.extent] ;
+        UIImage *blurredImage = [[UIImage alloc] initWithCGImage:blurredImgRef scale:2.0 orientation:UIImageOrientationUp];
+//        self.blurredImage = blurredImage;
+        NSLog(@"-prepareBlur completed");
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.blurLayer removeFromSuperlayer];
+
+            CALayer *blurLayer = [[CALayer alloc] init];
+            blurLayer.contents = (__bridge id)(blurredImage.CGImage);
+            blurLayer.opaque = NO;
+            blurLayer.opacity = 0.0f;
+            blurLayer.backgroundColor = [UIColor clearColor].CGColor;
+
+            CGSize difference = CGSizeMake(blurredImage.size.width - self.frame.size.width,
+                                           blurredImage.size.height - self.frame.size.height);
+            CGRect frame = CGRectZero;
+            frame.origin = CGPointMake(-difference.width / 2, -difference.height / 2);
+            frame.size = CGSizeMake(self.bounds.size.width + difference.width,
+                                    self.bounds.size.height + difference.height);
+            blurLayer.frame = frame;
+            blurLayer.actions = @{
+                                  @"opacity" : [NSNull null]
+                                  };
+            [self addSublayer:blurLayer];
+
+            self.blurLayer = blurLayer;
+            self.lastPosition = CGPointMake(FLT_MAX, FLT_MAX);
+        });
+    });
+}
+
+- (void)addAnimation:(CAAnimation *)anim forKey:(NSString *)key
+{
+    [super addAnimation:anim forKey:key];
+
+    CAPropertyAnimation *animation = (CAPropertyAnimation *)anim;
+    if ([animation respondsToSelector:@selector(keyPath)]) {
+        if ([animation.keyPath isEqualToString:NSStringFromSelector(@selector(position))]) {
+            [self.displayLink invalidate];
+            self.displayLink = nil;
+
+            self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
+            [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+        }
+    }
+}
+
+- (void)tick:(CADisplayLink *)displayLink
+{
+    CGPoint realPosition = ((CALayer *)self.presentationLayer).position;
+
+    // check if "undefined"
+    if (self.lastPosition.x != FLT_MAX) {
+        CGFloat dx = abs(self.lastPosition.x - realPosition.x);
+        CGFloat dy = abs(self.lastPosition.y - realPosition.y);
+
+        // TODO: dx is getting ignored
+
+        CGFloat unboundedOpacity = log2(dy) / 4.0f;
+        CGFloat opacity = fmax(fmin(unboundedOpacity, 1.0), 0.0);
+        self.blurLayer.opacity = opacity;
+//        NSLog(@"opacity: %f", opacity);
+
+        if (!self.animationKeys || [self.animationKeys count] == 0) {
+            [self.displayLink invalidate];
+            self.displayLink = nil;
+        }
+    }
+
+
+    self.lastPosition = realPosition;
+}
+
+@end
 
 @interface MotionBlurredView()
 
@@ -25,47 +135,9 @@
     return self;
 }
 
-- (void)enableMotionBlur
++ (Class)layerClass
 {
-    CGFloat insetX = 50;
-    CGFloat insetY = 50;
-    CGRect snapshotFrame = CGRectInset(self.bounds, -insetX, -insetY);
-
-    UIGraphicsBeginImageContextWithOptions(snapshotFrame.size, NO, 0.0f);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    UIColor *transparent = [UIColor colorWithRed:0.886 green:0.847 blue:0.812 alpha:0];
-    CGContextSetFillColorWithColor(context, transparent.CGColor);
-    CGContextFillRect(context, CGRectMake(0, 0, CGRectGetWidth(snapshotFrame), CGRectGetHeight(snapshotFrame)));
-    [self drawViewHierarchyInRect:CGRectMake(insetX, insetY, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)) afterScreenUpdates:YES];
-    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-
-//    GPUImageMotionBlurFilter *motionBlurFilter = [[GPUImageMotionBlurFilter alloc] init];
-//    motionBlurFilter.blurAngle = 90;
-//    motionBlurFilter.blurSize = 20.0f;
-//
-//    UIImage *blurredImage = [motionBlurFilter imageByFilteringImage:snapshotImage];
-//
-//    NSData *pngData = UIImagePNGRepresentation(blurredImage);
-//
-//    NSURL *documents = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
-//                                                               inDomains:NSUserDomainMask] lastObject];
-//    NSString *path = [documents.path
-//                      stringByAppendingPathComponent:[NSString stringWithFormat:@"blurredImage%ld.png", (long)[[NSDate date] timeIntervalSince1970]]];
-//    [pngData writeToFile:path atomically:YES];
-
-//    if (!self.blurImageView) {
-//        UIImageView *imageView = [[UIImageView alloc] initWithImage:blurredImage];
-//        imageView.backgroundColor = [UIColor clearColor];
-//        imageView.opaque = NO;
-//        CGRect f = imageView.frame;
-//        f.origin = CGPointMake(-insetX, -insetY);
-//        imageView.frame = f;
-//
-//        [self addSubview:imageView];
-//
-//        self.blurImageView = imageView;
-//    }
+    return [MotionBlurredLayer class];
 }
 
 @end

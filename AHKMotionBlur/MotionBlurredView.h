@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MotionBlurredView : UIView
+@interface MotionBlurredLayer : CALayer
 
-- (void)enableMotionBlur;
+- (void)prepareBlur;
 
+@end
+
+
+@interface MotionBlurredView : UIImageView
 @end
