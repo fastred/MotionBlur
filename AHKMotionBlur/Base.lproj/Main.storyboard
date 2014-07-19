@@ -26,7 +26,7 @@
                                     <action selector="move:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ih2-Wi-sSQ"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TopMenu" translatesAutoresizingMaskIntoConstraints="NO" id="cpo-aj-Wnx" customClass="MotionBlurredView">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TopMenu" translatesAutoresizingMaskIntoConstraints="NO" id="cpo-aj-Wnx">
                                 <rect key="frame" x="81" y="0.0" width="319" height="281"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="319" id="oYV-nM-YAi"/>

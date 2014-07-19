@@ -7,11 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "MotionBlurredView.h"
+#import "UIView+MotionBlur.h"
 
 @interface ViewController ()
 
-@property (weak, nonatomic) IBOutlet MotionBlurredView *motionBlurredView;
+@property (weak, nonatomic) IBOutlet UIImageView *motionBlurredView;
 
 // strong, because we'll be deactivating it, so view will stop referencing it
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *motionViewTopHiddenConstraint;
@@ -43,7 +43,7 @@
     [super viewDidAppear:animated];
 
     __weak typeof(self)weakSelf = self;
-    [((MotionBlurredLayer *)self.motionBlurredView.layer) prepareBlurForAngle:M_PI_2 completion:^{
+    [self.motionBlurredView prepareBlurForAngle:M_PI_2 completion:^{
         [weakSelf.toggleButton setTitle:@"Toggle" forState:UIControlStateNormal];
         weakSelf.toggleButton.enabled = YES;
     }];

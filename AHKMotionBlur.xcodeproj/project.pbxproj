@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A69FF8C9197AFF3D006994EF /* UIView+MotionBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = A69FF8C8197AFF3D006994EF /* UIView+MotionBlur.m */; };
 		A6E3925D19784EDC00C02D47 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3925C19784EDC00C02D47 /* main.m */; };
 		A6E3926019784EDC00C02D47 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3925F19784EDC00C02D47 /* AppDelegate.m */; };
 		A6E3926319784EDC00C02D47 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3926219784EDC00C02D47 /* ViewController.m */; };
 		A6E3926619784EDC00C02D47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E3926419784EDC00C02D47 /* Main.storyboard */; };
 		A6E3926819784EDC00C02D47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E3926719784EDC00C02D47 /* Images.xcassets */; };
-		A6E3927F19784F1400C02D47 /* MotionBlurredView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3927E19784F1400C02D47 /* MotionBlurredView.m */; };
 		A6E3928219784FA800C02D47 /* MotionBlurFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3928119784FA800C02D47 /* MotionBlurFilter.m */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A69FF8C7197AFF3D006994EF /* UIView+MotionBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MotionBlur.h"; sourceTree = "<group>"; };
+		A69FF8C8197AFF3D006994EF /* UIView+MotionBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MotionBlur.m"; sourceTree = "<group>"; };
 		A6E3925719784EDC00C02D47 /* AHKMotionBlur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AHKMotionBlur.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E3925B19784EDC00C02D47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6E3925C19784EDC00C02D47 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -44,8 +46,6 @@
 		A6E3926519784EDC00C02D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A6E3926719784EDC00C02D47 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A6E3926D19784EDC00C02D47 /* AHKMotionBlurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AHKMotionBlurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A6E3927D19784F1400C02D47 /* MotionBlurredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurredView.h; sourceTree = "<group>"; };
-		A6E3927E19784F1400C02D47 /* MotionBlurredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionBlurredView.m; sourceTree = "<group>"; };
 		A6E3928019784FA800C02D47 /* MotionBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurFilter.h; sourceTree = "<group>"; };
 		A6E3928119784FA800C02D47 /* MotionBlurFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionBlurFilter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,9 +94,9 @@
 				A6E3926419784EDC00C02D47 /* Main.storyboard */,
 				A6E3928019784FA800C02D47 /* MotionBlurFilter.h */,
 				A6E3928119784FA800C02D47 /* MotionBlurFilter.m */,
-				A6E3927D19784F1400C02D47 /* MotionBlurredView.h */,
-				A6E3927E19784F1400C02D47 /* MotionBlurredView.m */,
 				A6E3925A19784EDC00C02D47 /* Supporting Files */,
+				A69FF8C7197AFF3D006994EF /* UIView+MotionBlur.h */,
+				A69FF8C8197AFF3D006994EF /* UIView+MotionBlur.m */,
 				A6E3926119784EDC00C02D47 /* ViewController.h */,
 				A6E3926219784EDC00C02D47 /* ViewController.m */,
 			);
@@ -212,11 +212,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A69FF8C9197AFF3D006994EF /* UIView+MotionBlur.m in Sources */,
 				A6E3928219784FA800C02D47 /* MotionBlurFilter.m in Sources */,
 				A6E3926319784EDC00C02D47 /* ViewController.m in Sources */,
 				A6E3926019784EDC00C02D47 /* AppDelegate.m in Sources */,
 				A6E3925D19784EDC00C02D47 /* main.m in Sources */,
-				A6E3927F19784F1400C02D47 /* MotionBlurredView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
