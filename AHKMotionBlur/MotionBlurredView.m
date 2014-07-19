@@ -31,7 +31,7 @@
     UIGraphicsEndImageContext();
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        CIContext *context = [CIContext contextWithOptions:nil];               // 1
+        CIContext *context = [CIContext contextWithOptions:@{ kCIContextPriorityRequestLow : @YES }];
         CIImage *inputImage = [CIImage imageWithCGImage:snapshotImage.CGImage];
 
         MotionBlurFilter *motionBlurFilter = [[MotionBlurFilter alloc] init];
