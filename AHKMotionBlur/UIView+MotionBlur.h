@@ -12,7 +12,7 @@
 
 @interface UIView (MotionBlur)
 
-- (void)prepareBlurForAngle:(CGFloat)angle completion:(void (^)(void))completionBlock;
+- (void)enableBlurWithAngle:(CGFloat)angle completion:(void (^)(void))completionBlock;
 - (void)disableBlur;
 
 @end

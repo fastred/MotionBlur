@@ -40,7 +40,7 @@
     [super viewDidAppear:animated];
 
     __weak typeof(self)weakSelf = self;
-    [self.topMenu prepareBlurForAngle:M_PI_2 completion:^{
+    [self.topMenu enableBlurWithAngle:M_PI_2 completion:^{
         [weakSelf.toggleButton setTitle:@"Toggle" forState:UIControlStateNormal];
         weakSelf.toggleButton.enabled = YES;
     }];

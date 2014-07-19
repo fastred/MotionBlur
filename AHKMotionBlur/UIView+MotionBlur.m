@@ -60,7 +60,7 @@
 
 @implementation UIView (MotionBlur)
 
-- (void)prepareBlurForAngle:(CGFloat)angle completion:(void (^)(void))completionBlock
+- (void)enableBlurWithAngle:(CGFloat)angle completion:(void (^)(void))completionBlock
 {
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);
     CGContextRef graphicsContext = UIGraphicsGetCurrentContext();
