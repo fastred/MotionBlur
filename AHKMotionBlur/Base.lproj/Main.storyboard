@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
     </dependencies>
@@ -13,11 +13,12 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUw-Ol-U9g">
-                                <rect key="frame" x="20" y="50" width="280" height="788"/>
+                                <rect key="frame" x="20" y="385" width="440" height="35"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <state key="normal" title="Toggle">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -26,7 +27,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TopMenu" translatesAutoresizingMaskIntoConstraints="NO" id="cpo-aj-Wnx" customClass="MotionBlurredView">
-                                <rect key="frame" x="0.0" y="0.0" width="319" height="281"/>
+                                <rect key="frame" x="81" y="0.0" width="319" height="281"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="319" id="oYV-nM-YAi"/>
                                     <constraint firstAttribute="height" constant="281" id="yCb-iB-cK0"/>
@@ -36,12 +37,11 @@
                         <color key="backgroundColor" red="0.90682077625570778" green="0.90682077625570778" blue="0.90682077625570778" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="uUw-Ol-U9g" secondAttribute="centerX" id="352-or-AdP"/>
-                            <constraint firstItem="cpo-aj-Wnx" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" priority="999" constant="-20" id="EgX-23-mpK"/>
-                            <constraint firstItem="uUw-Ol-U9g" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="30" id="Spe-aG-Ec4"/>
-                            <constraint firstItem="cpo-aj-Wnx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ekU-PB-tRF"/>
-                            <constraint firstAttribute="centerY" secondItem="uUw-Ol-U9g" secondAttribute="centerY" constant="-160" id="gO4-eZ-MTB"/>
+                            <constraint firstItem="cpo-aj-Wnx" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" priority="999" constant="-20" id="EgX-23-mpK" userLabel="(-20) - TopMenu.Top - Top Layout Guide"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uUw-Ol-U9g" secondAttribute="bottom" constant="60" id="Fr4-H5-2LS"/>
                             <constraint firstAttribute="trailing" secondItem="uUw-Ol-U9g" secondAttribute="trailing" constant="20" id="hfg-Q5-0IS"/>
-                            <constraint firstItem="cpo-aj-Wnx" firstAttribute="bottom" secondItem="jyV-Pf-zRb" secondAttribute="bottom" priority="998" constant="-20" id="ohN-gP-t2l"/>
+                            <constraint firstItem="cpo-aj-Wnx" firstAttribute="bottom" secondItem="jyV-Pf-zRb" secondAttribute="bottom" priority="998" constant="-20" id="ohN-gP-t2l" userLabel="(-20) - TopMenu.Bottom - Top Layout Guide"/>
+                            <constraint firstAttribute="centerX" secondItem="cpo-aj-Wnx" secondAttribute="centerX" id="q9Y-Vo-rmO"/>
                         </constraints>
                     </view>
                     <connections>
@@ -52,18 +52,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="114" y="138"/>
+            <point key="canvasLocation" x="171" y="116.61971830985915"/>
         </scene>
     </scenes>
     <resources>
         <image name="TopMenu" width="319" height="281"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4">
-            <size key="portraitSize" width="320" height="568"/>
-            <size key="landscapeSize" width="568" height="320"/>
-        </simulatedScreenMetrics>
-    </simulatedMetricsContainer>
 </document>
