@@ -38,7 +38,7 @@
 {
     [super viewDidAppear:animated];
 
-    [((MotionBlurredLayer *)self.motionBlurredView.layer) prepareBlur];
+    [((MotionBlurredLayer *)self.motionBlurredView.layer) prepareBlurForAngle:M_PI_2];
 }
 
 - (IBAction)move:(UIButton *)sender
@@ -59,8 +59,6 @@
     } completion:^(BOOL finished) {
 
     }];
-//    [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
-//    } completion:nil];
 }
 
 @end

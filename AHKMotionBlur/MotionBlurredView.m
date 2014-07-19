@@ -11,7 +11,6 @@
 
 @interface MotionBlurredLayer()
 
-//@property (nonatomic, strong) UIImage *blurredImage;
 @property (nonatomic, weak) CALayer *blurLayer;
 @property (nonatomic, strong) CADisplayLink *displayLink;
 @property (nonatomic) CGPoint lastPosition;
@@ -20,7 +19,7 @@
 
 @implementation MotionBlurredLayer
 
-- (void)prepareBlur
+- (void)prepareBlurForAngle:(CGFloat)angle
 {
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);
     CGContextRef graphicsContext = UIGraphicsGetCurrentContext();
@@ -35,16 +34,16 @@
         CIContext *context = [CIContext contextWithOptions:nil];               // 1
         CIImage *inputImage = [CIImage imageWithCGImage:snapshotImage.CGImage];
 
-        MotionBlurFilter *adjustmentFilter = [[MotionBlurFilter alloc] init];
-        [adjustmentFilter setDefaults];
-        adjustmentFilter.inputImage = inputImage;
+        MotionBlurFilter *motionBlurFilter = [[MotionBlurFilter alloc] init];
+        [motionBlurFilter setDefaults];
+        motionBlurFilter.inputAngle = @(angle);
+        motionBlurFilter.inputImage = inputImage;
 
-        CIImage *outputImage = [adjustmentFilter valueForKey:@"outputImage"];
+        CIImage *outputImage = [motionBlurFilter valueForKey:@"outputImage"];
 
         // back to UIImage
         CGImageRef blurredImgRef = [context createCGImage:outputImage fromRect:outputImage.extent] ;
         UIImage *blurredImage = [[UIImage alloc] initWithCGImage:blurredImgRef scale:2.0 orientation:UIImageOrientationUp];
-//        self.blurredImage = blurredImage;
         NSLog(@"-prepareBlur completed");
 
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -74,6 +73,11 @@
     });
 }
 
+- (void)layoutSublayers
+{
+    [super layoutSublayers];
+}
+
 - (void)addAnimation:(CAAnimation *)anim forKey:(NSString *)key
 {
     [super addAnimation:anim forKey:key];
@@ -94,14 +98,13 @@
 {
     CGPoint realPosition = ((CALayer *)self.presentationLayer).position;
 
-    // check if "undefined"
+    // check if last position isn't "undefined", where undefined is set to FLT_MAX (it's kind of a hack)
     if (self.lastPosition.x != FLT_MAX) {
         CGFloat dx = abs(self.lastPosition.x - realPosition.x);
         CGFloat dy = abs(self.lastPosition.y - realPosition.y);
+        CGFloat delta = sqrt(pow(dx, 2) + pow(dy, 2));
 
-        // TODO: dx is getting ignored
-
-        CGFloat unboundedOpacity = log2(dy) / 4.0f;
+        CGFloat unboundedOpacity = log2(delta) / 5.0f;
         CGFloat opacity = fmax(fmin(unboundedOpacity, 1.0), 0.0);
         self.blurLayer.opacity = opacity;
 //        NSLog(@"opacity: %f", opacity);
@@ -111,7 +114,6 @@
             self.displayLink = nil;
         }
     }
-
 
     self.lastPosition = realPosition;
 }

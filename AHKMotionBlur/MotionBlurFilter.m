@@ -34,10 +34,18 @@ CGRect regionOf(CGRect rect, CIVector *velocity)
     return kernel;
 }
 
+- (void)setDefaults
+{
+    [super setDefaults];
+
+    self.inputRadius = @(40);
+    self.inputAngle = @(M_PI_2);
+}
+
 - (CIImage *)outputImage
 {
-    float r = 20;
-    float a = M_PI_2;
+    float r = self.inputRadius.floatValue;
+    float a = self.inputAngle.floatValue;
     CIVector *velocity = [CIVector vectorWithX:r*cos(a) Y:r*sin(a)];
     CGRect DOD = CGRectInset(self.inputImage.extent, -abs(velocity.X), -abs(velocity.Y));
 
