@@ -12,12 +12,18 @@
 		A6E3926319784EDC00C02D47 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3926219784EDC00C02D47 /* ViewController.m */; };
 		A6E3926619784EDC00C02D47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E3926419784EDC00C02D47 /* Main.storyboard */; };
 		A6E3926819784EDC00C02D47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E3926719784EDC00C02D47 /* Images.xcassets */; };
-		A6E3927419784EDC00C02D47 /* AHKMotionBlurTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3927319784EDC00C02D47 /* AHKMotionBlurTests.m */; };
 		A6E3927F19784F1400C02D47 /* MotionBlurredView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3927E19784F1400C02D47 /* MotionBlurredView.m */; };
 		A6E3928219784FA800C02D47 /* MotionBlurFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3928119784FA800C02D47 /* MotionBlurFilter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A69FF8C0197AF15E006994EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A6E3924F19784EDC00C02D47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A6E3925619784EDC00C02D47;
+			remoteInfo = AHKMotionBlur;
+		};
 		A6E3926E19784EDC00C02D47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A6E3924F19784EDC00C02D47 /* Project object */;
@@ -38,8 +44,6 @@
 		A6E3926519784EDC00C02D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A6E3926719784EDC00C02D47 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A6E3926D19784EDC00C02D47 /* AHKMotionBlurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AHKMotionBlurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A6E3927219784EDC00C02D47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A6E3927319784EDC00C02D47 /* AHKMotionBlurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AHKMotionBlurTests.m; sourceTree = "<group>"; };
 		A6E3927D19784F1400C02D47 /* MotionBlurredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurredView.h; sourceTree = "<group>"; };
 		A6E3927E19784F1400C02D47 /* MotionBlurredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionBlurredView.m; sourceTree = "<group>"; };
 		A6E3928019784FA800C02D47 /* MotionBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurFilter.h; sourceTree = "<group>"; };
@@ -68,7 +72,6 @@
 			isa = PBXGroup;
 			children = (
 				A6E3925919784EDC00C02D47 /* AHKMotionBlur */,
-				A6E3927019784EDC00C02D47 /* AHKMotionBlurTests */,
 				A6E3925819784EDC00C02D47 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -109,23 +112,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A6E3927019784EDC00C02D47 /* AHKMotionBlurTests */ = {
-			isa = PBXGroup;
-			children = (
-				A6E3927319784EDC00C02D47 /* AHKMotionBlurTests.m */,
-				A6E3927119784EDC00C02D47 /* Supporting Files */,
-			);
-			path = AHKMotionBlurTests;
-			sourceTree = "<group>";
-		};
-		A6E3927119784EDC00C02D47 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A6E3927219784EDC00C02D47 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -158,6 +144,7 @@
 			);
 			dependencies = (
 				A6E3926F19784EDC00C02D47 /* PBXTargetDependency */,
+				A69FF8C1197AF15E006994EF /* PBXTargetDependency */,
 			);
 			name = AHKMotionBlurTests;
 			productName = AHKMotionBlurTests;
@@ -237,13 +224,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6E3927419784EDC00C02D47 /* AHKMotionBlurTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A69FF8C1197AF15E006994EF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A6E3925619784EDC00C02D47 /* AHKMotionBlur */;
+			targetProxy = A69FF8C0197AF15E006994EF /* PBXContainerItemProxy */;
+		};
 		A6E3926F19784EDC00C02D47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A6E3925619784EDC00C02D47 /* AHKMotionBlur */;
