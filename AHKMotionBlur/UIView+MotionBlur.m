@@ -84,7 +84,7 @@
 
         // back to UIImage
         CGImageRef blurredImgRef = [context createCGImage:outputImage fromRect:outputImage.extent] ;
-        UIImage *blurredImage = [[UIImage alloc] initWithCGImage:blurredImgRef scale:2.0 orientation:UIImageOrientationUp];
+        UIImage *blurredImage = [[UIImage alloc] initWithCGImage:blurredImgRef scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.blurLayer removeFromSuperlayer];
