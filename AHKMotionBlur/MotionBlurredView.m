@@ -19,7 +19,7 @@
 
 @implementation MotionBlurredLayer
 
-- (void)prepareBlurForAngle:(CGFloat)angle
+- (void)prepareBlurForAngle:(CGFloat)angle completion:(void (^)(void))completionBlock;
 {
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);
     CGContextRef graphicsContext = UIGraphicsGetCurrentContext();
@@ -44,7 +44,6 @@
         // back to UIImage
         CGImageRef blurredImgRef = [context createCGImage:outputImage fromRect:outputImage.extent] ;
         UIImage *blurredImage = [[UIImage alloc] initWithCGImage:blurredImgRef scale:2.0 orientation:UIImageOrientationUp];
-        NSLog(@"-prepareBlur completed");
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.blurLayer removeFromSuperlayer];
@@ -69,6 +68,10 @@
 
             self.blurLayer = blurLayer;
             self.lastPosition = CGPointMake(FLT_MAX, FLT_MAX);
+
+            if (completionBlock) {
+                completionBlock();
+            }
         });
     });
 }
@@ -107,7 +110,6 @@
         CGFloat unboundedOpacity = log2(delta) / 5.0f;
         CGFloat opacity = fmax(fmin(unboundedOpacity, 1.0), 0.0);
         self.blurLayer.opacity = opacity;
-//        NSLog(@"opacity: %f", opacity);
 
         if (!self.animationKeys || [self.animationKeys count] == 0) {
             [self.displayLink invalidate];

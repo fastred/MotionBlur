@@ -10,7 +10,7 @@
 
 @interface MotionBlurredLayer : CALayer
 
-- (void)prepareBlurForAngle:(CGFloat)angle;
+- (void)prepareBlurForAngle:(CGFloat)angle completion:(void (^)(void))completionBlock;
 
 @end
 
