@@ -10,7 +10,7 @@
 
 
 static NSString * const kKernelSource = @"kernel vec4 motionBlur (sampler image, vec2 velocity) { \
-const int NUM_SAMPLES = 3; \
+const int NUM_SAMPLES = 5; \
 \
 vec4 s = vec4(0.0); \
 vec2 dc = destCoord(), offset = -velocity; \
