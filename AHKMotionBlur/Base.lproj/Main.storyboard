@@ -33,14 +33,22 @@
                                     <constraint firstAttribute="height" constant="281" id="yCb-iB-cK0"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It uses GPU, so it's slow on iOS Simulator" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLc-vj-Dih">
+                                <rect key="frame" x="96" y="428" width="288" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90682077625570778" green="0.90682077625570778" blue="0.90682077625570778" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="uUw-Ol-U9g" secondAttribute="centerX" id="352-or-AdP"/>
+                            <constraint firstAttribute="centerX" secondItem="qLc-vj-Dih" secondAttribute="centerX" id="7ei-qv-avV"/>
                             <constraint firstItem="cpo-aj-Wnx" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" priority="999" constant="-20" id="EgX-23-mpK" userLabel="(-20) - TopMenu.Top - Top Layout Guide"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uUw-Ol-U9g" secondAttribute="bottom" constant="60" id="Fr4-H5-2LS"/>
                             <constraint firstAttribute="trailing" secondItem="uUw-Ol-U9g" secondAttribute="trailing" constant="20" id="hfg-Q5-0IS"/>
                             <constraint firstItem="cpo-aj-Wnx" firstAttribute="bottom" secondItem="jyV-Pf-zRb" secondAttribute="bottom" priority="998" constant="-20" id="ohN-gP-t2l" userLabel="(-20) - TopMenu.Bottom - Top Layout Guide"/>
+                            <constraint firstItem="qLc-vj-Dih" firstAttribute="top" secondItem="uUw-Ol-U9g" secondAttribute="bottom" constant="8" id="pYA-OY-BWP"/>
                             <constraint firstAttribute="centerX" secondItem="cpo-aj-Wnx" secondAttribute="centerX" id="q9Y-Vo-rmO"/>
                         </constraints>
                     </view>
