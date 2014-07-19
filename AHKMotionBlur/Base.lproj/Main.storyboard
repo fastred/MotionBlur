@@ -47,6 +47,7 @@
                     <connections>
                         <outlet property="motionBlurredView" destination="cpo-aj-Wnx" id="RlV-f3-8Hz"/>
                         <outlet property="motionViewTopHiddenConstraint" destination="ohN-gP-t2l" id="Aki-fM-xM4"/>
+                        <outlet property="toggleButton" destination="uUw-Ol-U9g" id="moo-bs-Kki"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

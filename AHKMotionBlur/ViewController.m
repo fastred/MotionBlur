@@ -16,6 +16,7 @@
 // strong, because we'll be deactivating it, so view will stop referencing it
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *motionViewTopHiddenConstraint;
 
+@property (weak, nonatomic) IBOutlet UIButton *toggleButton;
 @end
 
 @implementation ViewController
@@ -26,6 +27,9 @@
 
     // hide initially
     self.motionViewTopHiddenConstraint.priority = 1000;
+
+    [self.toggleButton setTitle:@"Creating motion blurred layer…" forState:UIControlStateNormal];
+    self.toggleButton.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,8 +42,10 @@
 {
     [super viewDidAppear:animated];
 
+    __weak typeof(self)weakSelf = self;
     [((MotionBlurredLayer *)self.motionBlurredView.layer) prepareBlurForAngle:M_PI_2 completion:^{
-        NSLog(@"Blur preparing completed");
+        [weakSelf.toggleButton setTitle:@"Toggle" forState:UIControlStateNormal];
+        weakSelf.toggleButton.enabled = YES;
     }];
 }
 
