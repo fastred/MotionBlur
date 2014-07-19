@@ -8,6 +8,21 @@
 
 #import "MotionBlurFilter.h"
 
+
+static NSString * const kKernelSource = @"kernel vec4 motionBlur (sampler image, vec2 velocity) { \
+const int NUM_SAMPLES = 3; \
+\
+vec4 s = vec4(0.0); \
+vec2 dc = destCoord(), offset = -velocity; \
+\
+for (int i=0; i < (NUM_SAMPLES * 2 + 1); i++) { \
+    s += sample (image, samplerTransform (image, dc + offset)); \
+    offset += velocity / float(NUM_SAMPLES); \
+} \
+\
+return s / float((NUM_SAMPLES * 2 + 1)); \
+}";
+
 CGRect regionOf(CGRect rect, CIVector *velocity)
 {
     return CGRectInset(rect, -abs(velocity.X), -abs(velocity.Y));
@@ -17,19 +32,12 @@ CGRect regionOf(CGRect rect, CIVector *velocity)
 
 - (CIKernel *)myKernel
 {
-    // TODO: use dispatch_once
     static CIKernel *kernel;
-    if (!kernel) {
-        NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"MotionBlurKernelSource" withExtension:@"txt"];
-        NSError *error;
-        NSString *kernelSource = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
 
-        if (!kernelSource) {
-            NSLog(@"%@", [error localizedDescription]);
-        }
-
-        kernel = [CIKernel kernelWithString:kernelSource];
-    }
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        kernel = [CIKernel kernelWithString:kKernelSource];
+    });
 
     return kernel;
 }
