@@ -27,10 +27,10 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TopMenu" translatesAutoresizingMaskIntoConstraints="NO" id="cpo-aj-Wnx">
-                                <rect key="frame" x="81" y="0.0" width="319" height="281"/>
+                                <rect key="frame" x="81" y="0.0" width="319" height="301"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="319" id="oYV-nM-YAi"/>
-                                    <constraint firstAttribute="height" constant="281" id="yCb-iB-cK0"/>
+                                    <constraint firstAttribute="height" constant="301" id="yCb-iB-cK0"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It uses GPU, so it's slow on iOS Simulator" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLc-vj-Dih">
@@ -64,6 +64,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="TopMenu" width="319" height="281"/>
+        <image name="TopMenu" width="319" height="301"/>
     </resources>
 </document>
