@@ -89,7 +89,6 @@
     if ([animation respondsToSelector:@selector(keyPath)]) {
         if ([animation.keyPath isEqualToString:NSStringFromSelector(@selector(position))]) {
             [self.displayLink invalidate];
-            self.displayLink = nil;
 
             self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
             [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
@@ -107,6 +106,7 @@
         CGFloat dy = abs(self.lastPosition.y - realPosition.y);
         CGFloat delta = sqrt(pow(dx, 2) + pow(dy, 2));
 
+        // rough approximation of a good looking blur
         CGFloat unboundedOpacity = log2(delta) / 5.0f;
         CGFloat opacity = fmax(fmin(unboundedOpacity, 1.0), 0.0);
         self.blurLayer.opacity = opacity;
@@ -122,11 +122,6 @@
 
 @end
 
-@interface MotionBlurredView()
-
-@property (weak, nonatomic) UIImageView *blurImageView;
-
-@end
 
 @implementation MotionBlurredView
 
