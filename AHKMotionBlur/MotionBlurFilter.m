@@ -9,18 +9,18 @@
 #import "MotionBlurFilter.h"
 
 
-static NSString * const kKernelSource = @"kernel vec4 motionBlur (sampler image, vec2 velocity) { \
-const int NUM_SAMPLES = 5; \
-\
-vec4 s = vec4(0.0); \
-vec2 dc = destCoord(), offset = -velocity; \
-\
-for (int i=0; i < (NUM_SAMPLES * 2 + 1); i++) { \
-    s += sample (image, samplerTransform (image, dc + offset)); \
-    offset += velocity / float(NUM_SAMPLES); \
-} \
-\
-return s / float((NUM_SAMPLES * 2 + 1)); \
+static NSString * const kKernelSource = @"kernel vec4 motionBlur(sampler image, vec2 velocity, float numSamplesInput) { \n\
+\n\
+int numSamples = int(floor(numSamplesInput)); \n\
+vec4 s = vec4(0.0); \n\
+vec2 dc = destCoord(), offset = -velocity; \n\
+\n\
+for (int i=0; i < (numSamples * 2 + 1); i++) { \n\
+    s += sample (image, samplerTransform (image, dc + offset)); \n\
+    offset += velocity / float(numSamples); \n\
+} \n\
+\n\
+return s / float((numSamples * 2 + 1)); \n\
 }";
 
 CGRect regionOf(CGRect rect, CIVector *velocity)
@@ -48,6 +48,7 @@ CGRect regionOf(CGRect rect, CIVector *velocity)
 
     self.inputRadius = @(40);
     self.inputAngle = @(M_PI_2);
+    self.numSamples = @(5);
 }
 
 - (CIImage *)outputImage
@@ -60,7 +61,7 @@ CGRect regionOf(CGRect rect, CIVector *velocity)
     return [[self myKernel] applyWithExtent:DOD
                                 roiCallback:^CGRect(int index, CGRect rect) {
                                     return regionOf(rect, velocity);
-                                } arguments: @[self.inputImage, velocity]];
+                                } arguments: @[self.inputImage, velocity, self.numSamples]];
     
 }
 

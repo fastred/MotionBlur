@@ -12,4 +12,5 @@
 @property (retain, nonatomic) CIImage *inputImage;
 @property (copy, nonatomic) NSNumber *inputRadius;
 @property (copy, nonatomic) NSNumber *inputAngle;
+@property (copy, nonatomic) NSNumber *numSamples;
 @end
