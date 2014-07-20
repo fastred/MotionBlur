@@ -13,6 +13,21 @@
 
 static CGFloat const kUndefinedCoordinateValue = FLT_MAX;
 
+CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat angle)
+{
+    CIContext *context = [CIContext contextWithOptions:@{ kCIContextPriorityRequestLow : @YES }];
+    CIImage *inputImage = [CIImage imageWithCGImage:snapshotImage.CGImage];
+
+    MotionBlurFilter *motionBlurFilter = [[MotionBlurFilter alloc] init];
+    [motionBlurFilter setDefaults];
+    motionBlurFilter.inputAngle = @(angle);
+    motionBlurFilter.inputImage = inputImage;
+
+    CIImage *outputImage = [motionBlurFilter valueForKey:@"outputImage"];
+    CGImageRef blurredImgRef = [context createCGImage:outputImage fromRect:outputImage.extent] ;
+    return blurredImgRef;
+}
+
 
 @interface UIView (MotionBlurProperties)
 
@@ -72,16 +87,8 @@ static CGFloat const kUndefinedCoordinateValue = FLT_MAX;
     UIImage *snapshotImage = [self layerSnapshot];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        CIContext *context = [CIContext contextWithOptions:@{ kCIContextPriorityRequestLow : @YES }];
-        CIImage *inputImage = [CIImage imageWithCGImage:snapshotImage.CGImage];
 
-        MotionBlurFilter *motionBlurFilter = [[MotionBlurFilter alloc] init];
-        [motionBlurFilter setDefaults];
-        motionBlurFilter.inputAngle = @(angle);
-        motionBlurFilter.inputImage = inputImage;
-
-        CIImage *outputImage = [motionBlurFilter valueForKey:@"outputImage"];
-        CGImageRef blurredImgRef = [context createCGImage:outputImage fromRect:outputImage.extent] ;
+        CGImageRef blurredImgRef = CGImageCreateByApplyingMotionBlur(snapshotImage, angle);
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.blurLayer removeFromSuperlayer];
