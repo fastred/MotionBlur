@@ -9,19 +9,21 @@
 #import "MotionBlurFilter.h"
 
 // The source should be included in a separate file, but it would be harder to distribute, so I put it in a string.
-static NSString * const kKernelSource = @"kernel vec4 motionBlur(sampler image, vec2 velocity, float numSamplesInput) { \n\
-\n\
-int numSamples = int(floor(numSamplesInput)); \n\
-vec4 s = vec4(0.0); \n\
-vec2 dc = destCoord(), offset = -velocity; \n\
-\n\
-for (int i=0; i < (numSamples * 2 + 1); i++) { \n\
-    s += sample (image, samplerTransform (image, dc + offset)); \n\
-    offset += velocity / float(numSamples); \n\
-} \n\
-\n\
-return s / float((numSamples * 2 + 1)); \n\
-}";
+static NSString * const kKernelSource = @"kernel vec4 motionBlur(sampler image, vec2 velocity, float numSamplesInput) {\
+\
+    int numSamples = int(floor(numSamplesInput));\
+    vec4 sum = vec4(0.0), avg = vec4(0.0);\
+    vec2 dc = destCoord(), offset = -velocity;                      \
+\
+    for (int i=0; i < (numSamples * 2 + 1); i++) {                  \
+        sum += sample (image, samplerTransform (image, dc + offset)); \
+        offset += velocity / float(numSamples);\
+    }\
+\
+    avg = sum / float((numSamples * 2 + 1));                        \
+    return avg;\
+}\
+";
 
 
 CGRect regionOf(CGRect rect, CIVector *velocity)
