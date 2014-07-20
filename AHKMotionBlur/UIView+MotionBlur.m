@@ -114,6 +114,8 @@ static CGFloat const kUndefinedCoordinateValue = FLT_MAX;
             self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
             [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 
+            CGImageRelease(blurredImgRef);
+
             if (completionBlock) {
                 completionBlock();
             }
