@@ -56,9 +56,9 @@ CGRect regionOf(CGRect rect, CIVector *velocity)
     float r = self.inputRadius.floatValue;
     float a = self.inputAngle.floatValue;
     CIVector *velocity = [CIVector vectorWithX:r*cos(a) Y:r*sin(a)];
-    CGRect DOD = CGRectInset(self.inputImage.extent, -abs(velocity.X), -abs(velocity.Y));
+    CGRect dod = regionOf(self.inputImage.extent, velocity);
 
-    return [[self myKernel] applyWithExtent:DOD
+    return [[self myKernel] applyWithExtent:dod
                                 roiCallback:^CGRect(int index, CGRect rect) {
                                     return regionOf(rect, velocity);
                                 } arguments: @[self.inputImage, velocity, self.numSamples]];
