@@ -46,6 +46,13 @@
     }];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+
+    [self.topMenu disableBlur];
+}
+
 - (IBAction)move:(UIButton *)sender
 {
     self.topMenuHiddenConstraint.active = !self.topMenuHiddenConstraint.active;
