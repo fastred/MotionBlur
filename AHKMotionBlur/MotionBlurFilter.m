@@ -23,6 +23,7 @@ for (int i=0; i < (numSamples * 2 + 1); i++) { \n\
 return s / float((numSamples * 2 + 1)); \n\
 }";
 
+
 CGRect regionOf(CGRect rect, CIVector *velocity)
 {
     return CGRectInset(rect, -abs(velocity.X), -abs(velocity.Y));
@@ -32,7 +33,7 @@ CGRect regionOf(CGRect rect, CIVector *velocity)
 
 - (CIKernel *)myKernel
 {
-    static CIKernel *kernel;
+    static CIKernel *kernel = nil;
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -62,7 +63,6 @@ CGRect regionOf(CGRect rect, CIVector *velocity)
                                 roiCallback:^CGRect(int index, CGRect rect) {
                                     return regionOf(rect, velocity);
                                 } arguments: @[self.inputImage, velocity, self.numSamples]];
-    
 }
 
 @end
