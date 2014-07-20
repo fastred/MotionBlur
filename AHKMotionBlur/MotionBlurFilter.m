@@ -8,7 +8,7 @@
 
 #import "MotionBlurFilter.h"
 
-
+// The source should be included in a separate file, but it would be harder to distribute, so I put it in a string.
 static NSString * const kKernelSource = @"kernel vec4 motionBlur(sampler image, vec2 velocity, float numSamplesInput) { \n\
 \n\
 int numSamples = int(floor(numSamplesInput)); \n\
