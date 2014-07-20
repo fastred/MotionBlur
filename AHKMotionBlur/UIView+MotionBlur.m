@@ -32,7 +32,7 @@ CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat ang
 @interface UIView (MotionBlurProperties)
 
 @property (nonatomic, weak) CALayer *blurLayer;
-@property (nonatomic, strong) CADisplayLink *displayLink;
+@property (nonatomic, weak) CADisplayLink *displayLink;
 // CGPoint boxed in NSValue.
 @property (nonatomic) NSValue *lastPosition;
 
@@ -57,7 +57,7 @@ CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat ang
 
 - (void)setDisplayLink:(CADisplayLink *)displayLink
 {
-    objc_setAssociatedObject(self, @selector(displayLink), displayLink, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(displayLink), displayLink, OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (CADisplayLink *)displayLink
@@ -118,8 +118,9 @@ CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat ang
 
             [self.displayLink invalidate];
             // CADisplayLink will run indefinitely, unless `-disableBlur` is called.
-            self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
-            [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+            CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
+            [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+            self.displayLink = displayLink;
 
             CGImageRelease(blurredImgRef);
 
