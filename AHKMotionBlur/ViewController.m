@@ -56,14 +56,14 @@
                           delay:0
          usingSpringWithDamping:0.8
           initialSpringVelocity:hiding ? 0.0 : 0.6
-                        options:0
+                        options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
 
                          [self.topMenu.superview layoutIfNeeded];
+                         self.view.backgroundColor = hiding ? [UIColor colorWithWhite:0.907 alpha:1.000] : [UIColor colorWithWhite:0.8 alpha:1.000];
+;
 
-    } completion:^(BOOL finished) {
-
-    }];
+    } completion:nil];
 }
 
 @end
