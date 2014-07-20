@@ -11,7 +11,6 @@
 #import "UIView+MotionBlur.h"
 #import "MotionBlurFilter.h"
 
-static CGFloat const kUndefinedCoordinateValue = FLT_MAX;
 
 CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat angle)
 {
@@ -114,8 +113,6 @@ CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat ang
             [self.layer addSublayer:blurLayer];
             self.blurLayer = blurLayer;
 
-            self.lastPosition = [NSValue valueWithCGPoint:CGPointMake(kUndefinedCoordinateValue, kUndefinedCoordinateValue)];
-
             [self.displayLink invalidate];
             // CADisplayLink will run indefinitely, unless `-disableBlur` is called.
             CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
@@ -155,7 +152,7 @@ CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat ang
     CGPoint realPosition = ((CALayer *)self.layer.presentationLayer).position;
     CGPoint lastPosition = [self.lastPosition CGPointValue];
 
-    if (lastPosition.x != kUndefinedCoordinateValue) {
+    if (self.lastPosition) {
         CGFloat dx = abs(realPosition.x - lastPosition.x);
         CGFloat dy = abs(realPosition.y - lastPosition.y);
         CGFloat delta = sqrt(pow(dx, 2) + pow(dy, 2));
