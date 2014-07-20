@@ -31,8 +31,8 @@ CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat ang
 
 @interface UIView (MotionBlurProperties)
 
-@property (nonatomic, weak) CALayer *blurLayer;
-@property (nonatomic, weak) CADisplayLink *displayLink;
+@property (weak, nonatomic) CALayer *blurLayer;
+@property (weak, nonatomic) CADisplayLink *displayLink;
 // CGPoint boxed in NSValue.
 @property (nonatomic) NSValue *lastPosition;
 
