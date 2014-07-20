@@ -11,12 +11,18 @@
 #import "UIView+MotionBlur.h"
 #import "MotionBlurFilter.h"
 
+static CGFloat const kUndefinedCoordinateValue = FLT_MAX;
+
+
 @interface UIView (MotionBlurProperties)
+
 @property (nonatomic, weak) CALayer *blurLayer;
 @property (nonatomic, strong) CADisplayLink *displayLink;
 // CGPoint boxed in NSValue.
 @property (nonatomic) NSValue *lastPosition;
+
 @end
+
 
 @implementation UIView (MotionBlurProperties)
 
@@ -62,14 +68,8 @@
 
 - (void)enableBlurWithAngle:(CGFloat)angle completion:(void (^)(void))completionBlock
 {
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);
-    CGContextRef graphicsContext = UIGraphicsGetCurrentContext();
-    CGContextFillRect(graphicsContext, self.bounds);
-
-    // good explanation of differences between drawViewHierarchyInRect:afterScreenUpdates: and renderInContext: https://github.com/radi/LiveFrost/issues/10#issuecomment-28959525
-    [self.layer renderInContext:graphicsContext];
-    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    // snapshot has to be performed on the main thread
+    UIImage *snapshotImage = [self layerSnapshot];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         CIContext *context = [CIContext contextWithOptions:@{ kCIContextPriorityRequestLow : @YES }];
@@ -81,43 +81,42 @@
         motionBlurFilter.inputImage = inputImage;
 
         CIImage *outputImage = [motionBlurFilter valueForKey:@"outputImage"];
-
-        // back to UIImage
         CGImageRef blurredImgRef = [context createCGImage:outputImage fromRect:outputImage.extent] ;
-        UIImage *blurredImage = [[UIImage alloc] initWithCGImage:blurredImgRef scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.blurLayer removeFromSuperlayer];
 
             CALayer *blurLayer = [[CALayer alloc] init];
-            blurLayer.contents = (__bridge id)(blurredImage.CGImage);
+            blurLayer.contents = (__bridge id)(blurredImgRef);
             blurLayer.opaque = NO;
             blurLayer.opacity = 0.0f;
             blurLayer.backgroundColor = [UIColor clearColor].CGColor;
 
-            CGSize difference = CGSizeMake(blurredImage.size.width - self.frame.size.width,
-                                           blurredImage.size.height - self.frame.size.height);
+            CGFloat scale = [UIScreen mainScreen].scale;
+            // Difference in size between the blurred image and the view.
+            // The blurred image is larger, because the blur crosses the edges.
+            CGSize difference = CGSizeMake(CGImageGetWidth(blurredImgRef) / scale - self.frame.size.width,
+                                           CGImageGetHeight(blurredImgRef) / scale - self.frame.size.height);
             CGRect frame = CGRectZero;
             frame.origin = CGPointMake(-difference.width / 2, -difference.height / 2);
             frame.size = CGSizeMake(self.bounds.size.width + difference.width,
                                     self.bounds.size.height + difference.height);
             blurLayer.frame = frame;
-            blurLayer.actions = @{
-                                  @"opacity" : [NSNull null]
-                                  };
+
+            blurLayer.actions = @{ @"opacity" : [NSNull null] };
             [self.layer addSublayer:blurLayer];
-
             self.blurLayer = blurLayer;
-            self.lastPosition = [NSValue valueWithCGPoint:CGPointMake(FLT_MAX, FLT_MAX)];
 
-            if (completionBlock) {
-                completionBlock();
-            }
+            self.lastPosition = [NSValue valueWithCGPoint:CGPointMake(kUndefinedCoordinateValue, kUndefinedCoordinateValue)];
 
             [self.displayLink invalidate];
             // CADisplayLink will run indefinitely, unless `-disableBlur` is called.
             self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
             [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+
+            if (completionBlock) {
+                completionBlock();
+            }
         });
     });
 }
@@ -125,8 +124,20 @@
 - (void)disableBlur
 {
     [self.displayLink invalidate];
-
     [self.blurLayer removeFromSuperlayer];
+}
+
+- (UIImage *)layerSnapshot
+{
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);
+    CGContextRef graphicsContext = UIGraphicsGetCurrentContext();
+    CGContextFillRect(graphicsContext, self.bounds);
+
+    // good explanation of differences between drawViewHierarchyInRect:afterScreenUpdates: and renderInContext: https://github.com/radi/LiveFrost/issues/10#issuecomment-28959525
+    [self.layer renderInContext:graphicsContext];
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return snapshotImage;
 }
 
 - (void)tick:(CADisplayLink *)displayLink
@@ -134,13 +145,12 @@
     CGPoint realPosition = ((CALayer *)self.layer.presentationLayer).position;
     CGPoint lastPosition = [self.lastPosition CGPointValue];
 
-    // check if last position isn't "undefined", where undefined is set to FLT_MAX (it's kind of a hack)
-    if (lastPosition.x != FLT_MAX) {
-        CGFloat dx = abs(lastPosition.x - realPosition.x);
-        CGFloat dy = abs(lastPosition.y - realPosition.y);
+    if (lastPosition.x != kUndefinedCoordinateValue) {
+        CGFloat dx = abs(realPosition.x - lastPosition.x);
+        CGFloat dy = abs(realPosition.y - lastPosition.y);
         CGFloat delta = sqrt(pow(dx, 2) + pow(dy, 2));
 
-        // rough approximation of a good looking blur
+        // A rough approximation of a good looking blur. The larger the speed, the larger opacity of the blur layer.
         CGFloat unboundedOpacity = log2(delta) / 5.0f;
         CGFloat opacity = fmax(fmin(unboundedOpacity, 1.0), 0.0);
         self.blurLayer.opacity = opacity;
