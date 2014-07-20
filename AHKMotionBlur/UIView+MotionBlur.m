@@ -100,14 +100,8 @@ CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat ang
 
             CGFloat scale = [UIScreen mainScreen].scale;
             // Difference in size between the blurred image and the view.
-            // The blurred image is larger, because the blur crosses the edges.
-            CGSize difference = CGSizeMake(CGImageGetWidth(blurredImgRef) / scale - self.frame.size.width,
-                                           CGImageGetHeight(blurredImgRef) / scale - self.frame.size.height);
-            CGRect frame = CGRectZero;
-            frame.origin = CGPointMake(-difference.width / 2, -difference.height / 2);
-            frame.size = CGSizeMake(self.bounds.size.width + difference.width,
-                                    self.bounds.size.height + difference.height);
-            blurLayer.frame = frame;
+            CGSize difference = CGSizeMake(CGImageGetWidth(blurredImgRef) / scale - CGRectGetWidth(self.frame), CGImageGetHeight(blurredImgRef) / scale - CGRectGetHeight(self.frame));
+            blurLayer.frame = CGRectInset(self.bounds, -difference.width / 2, -difference.height / 2);
 
             blurLayer.actions = @{ @"opacity" : [NSNull null] };
             [self.layer addSublayer:blurLayer];
