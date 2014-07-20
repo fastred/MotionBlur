@@ -94,9 +94,7 @@ CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat ang
 
             CALayer *blurLayer = [[CALayer alloc] init];
             blurLayer.contents = (__bridge id)(blurredImgRef);
-            blurLayer.opaque = NO;
             blurLayer.opacity = 0.0f;
-            blurLayer.backgroundColor = [UIColor clearColor].CGColor;
 
             CGFloat scale = [UIScreen mainScreen].scale;
             // Difference in size between the blurred image and the view.
