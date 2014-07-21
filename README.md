@@ -1,6 +1,6 @@
 # MotionBlur
 
-`MotionBlur` allows you to add motion blur effect to your animations (currently only position's change). See the [accompanying blog post](http://2014/07/21/motion-blur/) to learn how it's implemented.
+`MotionBlur` allows you to add motion blur effect to your animations (currently only position's change). See the [accompanying blog post](http://holko.pl/2014/07/21/motion-blur/) to learn how it's implemented.
 
 ![Demo GIF](https://raw.githubusercontent.com/fastred/MotionBlur/master/demo.gif)
 
