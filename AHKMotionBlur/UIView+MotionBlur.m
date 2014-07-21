@@ -22,7 +22,7 @@ CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat ang
     motionBlurFilter.inputAngle = @(angle);
     motionBlurFilter.inputImage = inputImage;
 
-    CIImage *outputImage = [motionBlurFilter valueForKey:@"outputImage"];
+    CIImage *outputImage = motionBlurFilter.outputImage;
     CGImageRef blurredImgRef = [context createCGImage:outputImage fromRect:outputImage.extent] ;
     return blurredImgRef;
 }
