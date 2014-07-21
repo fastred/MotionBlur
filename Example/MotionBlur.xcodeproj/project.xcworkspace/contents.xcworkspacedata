@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:AHKMotionBlur.xcodeproj">
+      location = "self:MotionBlur.xcodeproj">
    </FileRef>
 </Workspace>

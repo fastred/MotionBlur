@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A6E3925619784EDC00C02D47"
-               BuildableName = "AHKMotionBlur.app"
-               BlueprintName = "AHKMotionBlur"
-               ReferencedContainer = "container:AHKMotionBlur.xcodeproj">
+               BuildableName = "MotionBlur.app"
+               BlueprintName = "MotionBlur"
+               ReferencedContainer = "container:MotionBlur.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A6E3926C19784EDC00C02D47"
-               BuildableName = "AHKMotionBlurTests.xctest"
-               BlueprintName = "AHKMotionBlurTests"
-               ReferencedContainer = "container:AHKMotionBlur.xcodeproj">
+               BuildableName = "MotionBlurTests.xctest"
+               BlueprintName = "MotionBlurTests"
+               ReferencedContainer = "container:MotionBlur.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A6E3925619784EDC00C02D47"
-            BuildableName = "AHKMotionBlur.app"
-            BlueprintName = "AHKMotionBlur"
-            ReferencedContainer = "container:AHKMotionBlur.xcodeproj">
+            BuildableName = "MotionBlur.app"
+            BlueprintName = "MotionBlur"
+            ReferencedContainer = "container:MotionBlur.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A6E3925619784EDC00C02D47"
-            BuildableName = "AHKMotionBlur.app"
-            BlueprintName = "AHKMotionBlur"
-            ReferencedContainer = "container:AHKMotionBlur.xcodeproj">
+            BuildableName = "MotionBlur.app"
+            BlueprintName = "MotionBlur"
+            ReferencedContainer = "container:MotionBlur.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A6E3925619784EDC00C02D47"
-            BuildableName = "AHKMotionBlur.app"
-            BlueprintName = "AHKMotionBlur"
-            ReferencedContainer = "container:AHKMotionBlur.xcodeproj">
+            BuildableName = "MotionBlur.app"
+            BlueprintName = "MotionBlur"
+            ReferencedContainer = "container:MotionBlur.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

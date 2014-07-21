@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A69FF8C9197AFF3D006994EF /* UIView+MotionBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = A69FF8C8197AFF3D006994EF /* UIView+MotionBlur.m */; };
+		A6B9C22D197D569B008B2037 /* MotionBlurFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B9C22A197D569B008B2037 /* MotionBlurFilter.m */; };
+		A6B9C22E197D569B008B2037 /* UIView+MotionBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B9C22C197D569B008B2037 /* UIView+MotionBlur.m */; };
 		A6E3925D19784EDC00C02D47 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3925C19784EDC00C02D47 /* main.m */; };
 		A6E3926019784EDC00C02D47 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3925F19784EDC00C02D47 /* AppDelegate.m */; };
 		A6E3926319784EDC00C02D47 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3926219784EDC00C02D47 /* ViewController.m */; };
 		A6E3926619784EDC00C02D47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E3926419784EDC00C02D47 /* Main.storyboard */; };
 		A6E3926819784EDC00C02D47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E3926719784EDC00C02D47 /* Images.xcassets */; };
-		A6E3928219784FA800C02D47 /* MotionBlurFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3928119784FA800C02D47 /* MotionBlurFilter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +34,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A69FF8C7197AFF3D006994EF /* UIView+MotionBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MotionBlur.h"; sourceTree = "<group>"; };
-		A69FF8C8197AFF3D006994EF /* UIView+MotionBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MotionBlur.m"; sourceTree = "<group>"; };
-		A6E3925719784EDC00C02D47 /* AHKMotionBlur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AHKMotionBlur.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6B9C229197D569B008B2037 /* MotionBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurFilter.h; sourceTree = "<group>"; };
+		A6B9C22A197D569B008B2037 /* MotionBlurFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionBlurFilter.m; sourceTree = "<group>"; };
+		A6B9C22B197D569B008B2037 /* UIView+MotionBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MotionBlur.h"; sourceTree = "<group>"; };
+		A6B9C22C197D569B008B2037 /* UIView+MotionBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MotionBlur.m"; sourceTree = "<group>"; };
+		A6E3925719784EDC00C02D47 /* MotionBlur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MotionBlur.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E3925B19784EDC00C02D47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6E3925C19784EDC00C02D47 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A6E3925E19784EDC00C02D47 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -45,9 +47,7 @@
 		A6E3926219784EDC00C02D47 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		A6E3926519784EDC00C02D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A6E3926719784EDC00C02D47 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A6E3926D19784EDC00C02D47 /* AHKMotionBlurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AHKMotionBlurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A6E3928019784FA800C02D47 /* MotionBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurFilter.h; sourceTree = "<group>"; };
-		A6E3928119784FA800C02D47 /* MotionBlurFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionBlurFilter.m; sourceTree = "<group>"; };
+		A6E3926D19784EDC00C02D47 /* MotionBlurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotionBlurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +68,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A6B9C228197D567F008B2037 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A6B9C229197D569B008B2037 /* MotionBlurFilter.h */,
+				A6B9C22A197D569B008B2037 /* MotionBlurFilter.m */,
+				A6B9C22B197D569B008B2037 /* UIView+MotionBlur.h */,
+				A6B9C22C197D569B008B2037 /* UIView+MotionBlur.m */,
+			);
+			name = Classes;
+			path = ../Classes;
+			sourceTree = "<group>";
+		};
 		A6E3924E19784EDC00C02D47 = {
 			isa = PBXGroup;
 			children = (
+				A6B9C228197D567F008B2037 /* Classes */,
 				A6E3925919784EDC00C02D47 /* AHKMotionBlur */,
 				A6E3925819784EDC00C02D47 /* Products */,
 			);
@@ -79,8 +92,8 @@
 		A6E3925819784EDC00C02D47 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A6E3925719784EDC00C02D47 /* AHKMotionBlur.app */,
-				A6E3926D19784EDC00C02D47 /* AHKMotionBlurTests.xctest */,
+				A6E3925719784EDC00C02D47 /* MotionBlur.app */,
+				A6E3926D19784EDC00C02D47 /* MotionBlurTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,15 +105,12 @@
 				A6E3925F19784EDC00C02D47 /* AppDelegate.m */,
 				A6E3926719784EDC00C02D47 /* Images.xcassets */,
 				A6E3926419784EDC00C02D47 /* Main.storyboard */,
-				A6E3928019784FA800C02D47 /* MotionBlurFilter.h */,
-				A6E3928119784FA800C02D47 /* MotionBlurFilter.m */,
 				A6E3925A19784EDC00C02D47 /* Supporting Files */,
-				A69FF8C7197AFF3D006994EF /* UIView+MotionBlur.h */,
-				A69FF8C8197AFF3D006994EF /* UIView+MotionBlur.m */,
 				A6E3926119784EDC00C02D47 /* ViewController.h */,
 				A6E3926219784EDC00C02D47 /* ViewController.m */,
 			);
-			path = AHKMotionBlur;
+			name = AHKMotionBlur;
+			path = MotionBlur;
 			sourceTree = "<group>";
 		};
 		A6E3925A19784EDC00C02D47 /* Supporting Files */ = {
@@ -115,9 +125,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A6E3925619784EDC00C02D47 /* AHKMotionBlur */ = {
+		A6E3925619784EDC00C02D47 /* MotionBlur */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A6E3927719784EDC00C02D47 /* Build configuration list for PBXNativeTarget "AHKMotionBlur" */;
+			buildConfigurationList = A6E3927719784EDC00C02D47 /* Build configuration list for PBXNativeTarget "MotionBlur" */;
 			buildPhases = (
 				A6E3925319784EDC00C02D47 /* Sources */,
 				A6E3925419784EDC00C02D47 /* Frameworks */,
@@ -127,14 +137,14 @@
 			);
 			dependencies = (
 			);
-			name = AHKMotionBlur;
+			name = MotionBlur;
 			productName = AHKMotionBlur;
-			productReference = A6E3925719784EDC00C02D47 /* AHKMotionBlur.app */;
+			productReference = A6E3925719784EDC00C02D47 /* MotionBlur.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A6E3926C19784EDC00C02D47 /* AHKMotionBlurTests */ = {
+		A6E3926C19784EDC00C02D47 /* MotionBlurTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A6E3927A19784EDC00C02D47 /* Build configuration list for PBXNativeTarget "AHKMotionBlurTests" */;
+			buildConfigurationList = A6E3927A19784EDC00C02D47 /* Build configuration list for PBXNativeTarget "MotionBlurTests" */;
 			buildPhases = (
 				A6E3926919784EDC00C02D47 /* Sources */,
 				A6E3926A19784EDC00C02D47 /* Frameworks */,
@@ -146,9 +156,9 @@
 				A6E3926F19784EDC00C02D47 /* PBXTargetDependency */,
 				A69FF8C1197AF15E006994EF /* PBXTargetDependency */,
 			);
-			name = AHKMotionBlurTests;
+			name = MotionBlurTests;
 			productName = AHKMotionBlurTests;
-			productReference = A6E3926D19784EDC00C02D47 /* AHKMotionBlurTests.xctest */;
+			productReference = A6E3926D19784EDC00C02D47 /* MotionBlurTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -169,7 +179,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A6E3925219784EDC00C02D47 /* Build configuration list for PBXProject "AHKMotionBlur" */;
+			buildConfigurationList = A6E3925219784EDC00C02D47 /* Build configuration list for PBXProject "MotionBlur" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -182,8 +192,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A6E3925619784EDC00C02D47 /* AHKMotionBlur */,
-				A6E3926C19784EDC00C02D47 /* AHKMotionBlurTests */,
+				A6E3925619784EDC00C02D47 /* MotionBlur */,
+				A6E3926C19784EDC00C02D47 /* MotionBlurTests */,
 			);
 		};
 /* End PBXProject section */
@@ -212,10 +222,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A69FF8C9197AFF3D006994EF /* UIView+MotionBlur.m in Sources */,
-				A6E3928219784FA800C02D47 /* MotionBlurFilter.m in Sources */,
+				A6B9C22E197D569B008B2037 /* UIView+MotionBlur.m in Sources */,
 				A6E3926319784EDC00C02D47 /* ViewController.m in Sources */,
 				A6E3926019784EDC00C02D47 /* AppDelegate.m in Sources */,
+				A6B9C22D197D569B008B2037 /* MotionBlurFilter.m in Sources */,
 				A6E3925D19784EDC00C02D47 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,12 +242,12 @@
 /* Begin PBXTargetDependency section */
 		A69FF8C1197AF15E006994EF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A6E3925619784EDC00C02D47 /* AHKMotionBlur */;
+			target = A6E3925619784EDC00C02D47 /* MotionBlur */;
 			targetProxy = A69FF8C0197AF15E006994EF /* PBXContainerItemProxy */;
 		};
 		A6E3926F19784EDC00C02D47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A6E3925619784EDC00C02D47 /* AHKMotionBlur */;
+			target = A6E3925619784EDC00C02D47 /* MotionBlur */;
 			targetProxy = A6E3926E19784EDC00C02D47 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -335,10 +345,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				INFOPLIST_FILE = AHKMotionBlur/Info.plist;
+				INFOPLIST_FILE = MotionBlur/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MotionBlur;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -348,10 +358,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				INFOPLIST_FILE = AHKMotionBlur/Info.plist;
+				INFOPLIST_FILE = MotionBlur/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MotionBlur;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -370,7 +380,7 @@
 				);
 				INFOPLIST_FILE = AHKMotionBlurTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MotionBlurTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
@@ -385,7 +395,7 @@
 				);
 				INFOPLIST_FILE = AHKMotionBlurTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MotionBlurTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
@@ -393,7 +403,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A6E3925219784EDC00C02D47 /* Build configuration list for PBXProject "AHKMotionBlur" */ = {
+		A6E3925219784EDC00C02D47 /* Build configuration list for PBXProject "MotionBlur" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A6E3927519784EDC00C02D47 /* Debug */,
@@ -402,7 +412,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A6E3927719784EDC00C02D47 /* Build configuration list for PBXNativeTarget "AHKMotionBlur" */ = {
+		A6E3927719784EDC00C02D47 /* Build configuration list for PBXNativeTarget "MotionBlur" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A6E3927819784EDC00C02D47 /* Debug */,
@@ -411,7 +421,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A6E3927A19784EDC00C02D47 /* Build configuration list for PBXNativeTarget "AHKMotionBlurTests" */ = {
+		A6E3927A19784EDC00C02D47 /* Build configuration list for PBXNativeTarget "MotionBlurTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A6E3927B19784EDC00C02D47 /* Debug */,
