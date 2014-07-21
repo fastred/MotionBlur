@@ -1,9 +1,6 @@
 # MotionBlur
 
-[![CocoaPods](https://img.shields.io/cocoapods/v/MotionBlur.svg?style=flat)](https://github.com/fastred/MotionBlur)
-
-
-`MotionBlur` allows you to add motion blur effect to your animations (currently only position's change). See the [accompanying blog post](http://holko.pl/2014/07/21/motion-blur/) to learn how it's implemented.
+`MotionBlur` allows you to add motion blur effect to your animations (currently only position's change). See the [accompanying blog post](http://2014/07/21/motion-blur/) to learn how it's implemented.
 
 ![Demo GIF](https://raw.githubusercontent.com/fastred/MotionBlur/master/demo.gif)
 
@@ -47,10 +44,7 @@ To run the example project; clone the repo and open `Example/MotionBlur.xcodepro
 
 ## Installation
 
-MotionBlur is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-    pod "MotionBlur"
+Copy files from `Classes/` to your project. CocoaPod will be made available when iOS 8 comes out.
 
 ## Author
 
