@@ -4,6 +4,8 @@
 
 ![Demo GIF](https://raw.githubusercontent.com/fastred/MotionBlur/master/demo.gif)
 
+*Note how the text and icons on the menu get blurred when it slides in and out.*
+
 ## Usage
 
 First, import it with:
