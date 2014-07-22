@@ -90,7 +90,7 @@ CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat ang
         CGImageRef blurredImgRef = CGImageCreateByApplyingMotionBlur(snapshotImage, angle);
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.blurLayer removeFromSuperlayer];
+            [self disableBlur];
 
             CALayer *blurLayer = [[CALayer alloc] init];
             blurLayer.contents = (__bridge id)(blurredImgRef);
@@ -105,7 +105,6 @@ CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat ang
             [self.layer addSublayer:blurLayer];
             self.blurLayer = blurLayer;
 
-            [self.displayLink invalidate];
             // CADisplayLink will run indefinitely, unless `-disableBlur` is called.
             CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
             [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
