@@ -13,14 +13,14 @@ static NSString * const kKernelSource = @"kernel vec4 motionBlur(sampler image, 
 \
     int numSamples = int(floor(numSamplesInput));\
     vec4 sum = vec4(0.0), avg = vec4(0.0);\
-    vec2 dc = destCoord(), offset = -velocity;                      \
+    vec2 dc = destCoord(), offset = -velocity;\
 \
-    for (int i=0; i < (numSamples * 2 + 1); i++) {                  \
-        sum += sample (image, samplerTransform (image, dc + offset)); \
+    for (int i=0; i < (numSamples * 2 + 1); i++) {\
+        sum += sample (image, samplerTransform (image, dc + offset));\
         offset += velocity / float(numSamples);\
     }\
 \
-    avg = sum / float((numSamples * 2 + 1));                        \
+    avg = sum / float((numSamples * 2 + 1));\
     return avg;\
 }\
 ";
