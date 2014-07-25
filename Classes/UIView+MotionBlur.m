@@ -144,6 +144,8 @@ CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat ang
     CGPoint lastPosition = [self.lastPosition CGPointValue];
 
     if (self.lastPosition) {
+        // TODO: there's an assumption that the animation has constant FPS. The following code should also use a timestamp of the previous frame.
+
         CGFloat dx = abs(realPosition.x - lastPosition.x);
         CGFloat dy = abs(realPosition.y - lastPosition.y);
         CGFloat delta = sqrt(pow(dx, 2) + pow(dy, 2));
