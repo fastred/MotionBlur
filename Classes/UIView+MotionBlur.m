@@ -12,7 +12,7 @@
 #import "MotionBlurFilter.h"
 
 
-CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat angle)
+static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat angle)
 {
     CIContext *context = [CIContext contextWithOptions:@{ kCIContextPriorityRequestLow : @YES }];
     CIImage *inputImage = [CIImage imageWithCGImage:snapshotImage.CGImage];
@@ -146,13 +146,13 @@ CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat ang
     if (self.lastPosition) {
         // TODO: there's an assumption that the animation has constant FPS. The following code should also use a timestamp of the previous frame.
 
-        CGFloat dx = abs(realPosition.x - lastPosition.x);
-        CGFloat dy = abs(realPosition.y - lastPosition.y);
+        CGFloat dx = fabs(realPosition.x - lastPosition.x);
+        CGFloat dy = fabs(realPosition.y - lastPosition.y);
         CGFloat delta = sqrt(pow(dx, 2) + pow(dy, 2));
 
         // A rough approximation of a good looking blur. The larger the speed, the larger opacity of the blur layer.
         CGFloat unboundedOpacity = log2(delta) / 5.0f;
-        CGFloat opacity = fmax(fmin(unboundedOpacity, 1.0), 0.0);
+        float opacity = (float)fmax(fmin(unboundedOpacity, 1.0), 0.0);
         self.blurLayer.opacity = opacity;
     }
 
