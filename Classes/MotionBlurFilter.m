@@ -25,10 +25,9 @@ static NSString * const kKernelSource = @"kernel vec4 motionBlur(sampler image, 
 }\
 ";
 
-
-CGRect regionOf(CGRect rect, CIVector *velocity)
+CG_INLINE CGRect regionOf(CGRect rect, CIVector *velocity)
 {
-    return CGRectInset(rect, -abs(velocity.X), -abs(velocity.Y));
+    return CGRectInset(rect, -fabs(velocity.X), -fabs(velocity.Y));
 }
 
 @implementation MotionBlurFilter
