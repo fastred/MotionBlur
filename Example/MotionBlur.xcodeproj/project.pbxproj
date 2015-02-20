@@ -16,23 +16,6 @@
 		A6E3926819784EDC00C02D47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E3926719784EDC00C02D47 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		A69FF8C0197AF15E006994EF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A6E3924F19784EDC00C02D47 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A6E3925619784EDC00C02D47;
-			remoteInfo = AHKMotionBlur;
-		};
-		A6E3926E19784EDC00C02D47 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A6E3924F19784EDC00C02D47 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A6E3925619784EDC00C02D47;
-			remoteInfo = AHKMotionBlur;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		A6B9C229197D569B008B2037 /* MotionBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurFilter.h; sourceTree = "<group>"; };
 		A6B9C22A197D569B008B2037 /* MotionBlurFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionBlurFilter.m; sourceTree = "<group>"; };
@@ -47,18 +30,10 @@
 		A6E3926219784EDC00C02D47 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		A6E3926519784EDC00C02D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A6E3926719784EDC00C02D47 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A6E3926D19784EDC00C02D47 /* MotionBlurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotionBlurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A6E3925419784EDC00C02D47 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A6E3926A19784EDC00C02D47 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -93,7 +68,6 @@
 			isa = PBXGroup;
 			children = (
 				A6E3925719784EDC00C02D47 /* MotionBlur.app */,
-				A6E3926D19784EDC00C02D47 /* MotionBlurTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -142,25 +116,6 @@
 			productReference = A6E3925719784EDC00C02D47 /* MotionBlur.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A6E3926C19784EDC00C02D47 /* MotionBlurTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A6E3927A19784EDC00C02D47 /* Build configuration list for PBXNativeTarget "MotionBlurTests" */;
-			buildPhases = (
-				A6E3926919784EDC00C02D47 /* Sources */,
-				A6E3926A19784EDC00C02D47 /* Frameworks */,
-				A6E3926B19784EDC00C02D47 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A6E3926F19784EDC00C02D47 /* PBXTargetDependency */,
-				A69FF8C1197AF15E006994EF /* PBXTargetDependency */,
-			);
-			name = MotionBlurTests;
-			productName = AHKMotionBlurTests;
-			productReference = A6E3926D19784EDC00C02D47 /* MotionBlurTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -172,10 +127,6 @@
 				TargetAttributes = {
 					A6E3925619784EDC00C02D47 = {
 						CreatedOnToolsVersion = 6.0;
-					};
-					A6E3926C19784EDC00C02D47 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = A6E3925619784EDC00C02D47;
 					};
 				};
 			};
@@ -193,7 +144,6 @@
 			projectRoot = "";
 			targets = (
 				A6E3925619784EDC00C02D47 /* MotionBlur */,
-				A6E3926C19784EDC00C02D47 /* MotionBlurTests */,
 			);
 		};
 /* End PBXProject section */
@@ -205,13 +155,6 @@
 			files = (
 				A6E3926619784EDC00C02D47 /* Main.storyboard in Resources */,
 				A6E3926819784EDC00C02D47 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A6E3926B19784EDC00C02D47 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,27 +173,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A6E3926919784EDC00C02D47 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		A69FF8C1197AF15E006994EF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A6E3925619784EDC00C02D47 /* MotionBlur */;
-			targetProxy = A69FF8C0197AF15E006994EF /* PBXContainerItemProxy */;
-		};
-		A6E3926F19784EDC00C02D47 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A6E3925619784EDC00C02D47 /* MotionBlur */;
-			targetProxy = A6E3926E19784EDC00C02D47 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A6E3926419784EDC00C02D47 /* Main.storyboard */ = {
@@ -366,40 +289,6 @@
 			};
 			name = Release;
 		};
-		A6E3927B19784EDC00C02D47 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AHKMotionBlur.app/AHKMotionBlur";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = AHKMotionBlurTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = MotionBlurTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		A6E3927C19784EDC00C02D47 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AHKMotionBlur.app/AHKMotionBlur";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = AHKMotionBlurTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = MotionBlurTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -417,15 +306,6 @@
 			buildConfigurations = (
 				A6E3927819784EDC00C02D47 /* Debug */,
 				A6E3927919784EDC00C02D47 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A6E3927A19784EDC00C02D47 /* Build configuration list for PBXNativeTarget "MotionBlurTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A6E3927B19784EDC00C02D47 /* Debug */,
-				A6E3927C19784EDC00C02D47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
