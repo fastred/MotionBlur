@@ -121,8 +121,16 @@ static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFl
 
 - (void)disableBlur
 {
+    //Stop DisplayLink
     [self.displayLink invalidate];
+    objc_setAssociatedObject(self, @selector(displayLink), nil, OBJC_ASSOCIATION_ASSIGN);
+    
+    //Clear lastPosition
+    objc_setAssociatedObject(self, @selector(lastPosition), nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    //Clear blur layer
     [self.blurLayer removeFromSuperlayer];
+    objc_setAssociatedObject(self, @selector(blurLayer), nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (UIImage *)layerSnapshot
