@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "MotionBlur"
-  s.version          = "0.1.0"
+  s.version          = "0.2.0"
   s.summary          = "MotionBlur allows you to add motion blur effect to iOS animations."
   s.homepage         = "https://github.com/fastred/MotionBlur"
   s.license          = 'MIT'
