@@ -123,6 +123,7 @@ static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFl
 {
     [self.displayLink invalidate];
     [self.blurLayer removeFromSuperlayer];
+    self.lastPosition = nil;
 }
 
 - (UIImage *)layerSnapshot
