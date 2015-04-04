@@ -45,8 +45,9 @@ To run the example project; clone the repo and open `Example/MotionBlur.xcodepro
  * iOS 8 and above
 
 ## Installation
+MotionBlur is available through CocoaPods. To install it, simply add the following line to your Podfile:
 
-Copy files from `Classes/` to your project. CocoaPod will be made available when iOS 8 comes out.
+    pod "MotionBlur"
 
 ## Author
 
