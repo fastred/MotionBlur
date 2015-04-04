@@ -110,14 +110,10 @@ static CGFloat opacityFromPositionDelta(CGFloat delta, CFTimeInterval tickDurati
 
             CALayer *blurLayer = [[CALayer alloc] init];
             blurLayer.contents = (__bridge id)(blurredImgRef);
-            blurLayer.opacity = 0.0f;
-
-            CGFloat scale = [UIScreen mainScreen].scale;
-            // Difference in size between the blurred image and the view.
-            CGSize difference = CGSizeMake(CGImageGetWidth(blurredImgRef) / scale - CGRectGetWidth(self.frame), CGImageGetHeight(blurredImgRef) / scale - CGRectGetHeight(self.frame));
-            blurLayer.frame = CGRectInset(self.bounds, -difference.width / 2, -difference.height / 2);
-
+            blurLayer.opacity = 0;
+            blurLayer.frame = [self blurredLayerFrameWithBlurredImage:blurredImgRef];
             blurLayer.actions = @{ NSStringFromSelector(@selector(opacity)) : [NSNull null] };
+
             [self.layer addSublayer:blurLayer];
             self.ahk_blurLayer = blurLayer;
 
@@ -140,6 +136,16 @@ static CGFloat opacityFromPositionDelta(CGFloat delta, CFTimeInterval tickDurati
     [self.ahk_displayLink invalidate];
     [self.ahk_blurLayer removeFromSuperlayer];
     self.ahk_lastPosition = nil;
+}
+
+
+- (CGRect)blurredLayerFrameWithBlurredImage:(CGImageRef)blurredImgRef
+{
+    CGFloat scale = [UIScreen mainScreen].scale;
+    // Difference in size between the blurred image and the view.
+    CGSize difference = CGSizeMake(CGImageGetWidth(blurredImgRef) / scale - CGRectGetWidth(self.frame), CGImageGetHeight(blurredImgRef) / scale - CGRectGetHeight(self.frame));
+    CGRect blurLayerFrame = CGRectInset(self.bounds, -difference.width / 2, -difference.height / 2);
+    return blurLayerFrame;
 }
 
 - (UIImage *)layerSnapshot
