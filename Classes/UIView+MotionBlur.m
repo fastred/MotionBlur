@@ -96,6 +96,8 @@ static CGFloat opacityFromPositionDelta(CGFloat delta, CFTimeInterval tickDurati
 
 @implementation UIView (MotionBlur)
 
+#pragma mark - Public
+
 - (void)enableBlurWithAngle:(CGFloat)angle completion:(void (^)(void))completionBlock
 {
     // snapshot has to be performed on the main thread
@@ -138,6 +140,8 @@ static CGFloat opacityFromPositionDelta(CGFloat delta, CFTimeInterval tickDurati
     self.ahk_lastPosition = nil;
 }
 
+
+#pragma mark - Private
 
 - (CGRect)blurredLayerFrameWithBlurredImage:(CGImageRef)blurredImgRef
 {
