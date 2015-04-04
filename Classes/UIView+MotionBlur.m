@@ -46,7 +46,7 @@ static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFl
 
 - (void)setBlurLayer:(CALayer *)blurLayer
 {
-    objc_setAssociatedObject(self, @selector(blurLayer), blurLayer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(blurLayer), blurLayer, OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (CALayer *)blurLayer
