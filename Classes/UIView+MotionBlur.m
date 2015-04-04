@@ -139,18 +139,21 @@ static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFl
 
 - (void)tick:(CADisplayLink *)displayLink
 {
-    CGPoint realPosition = ((CALayer *)self.layer.presentationLayer).position;
-    CGPoint lastPosition = [self.ahk_lastPosition CGPointValue];
+    const CGPoint realPosition = ((CALayer *)self.layer.presentationLayer).position;
+    const CGPoint lastPosition = [self.ahk_lastPosition CGPointValue];
 
     if (self.ahk_lastPosition) {
-        // TODO: there's an assumption that the animation has constant FPS. The following code should also use a timestamp of the previous frame.
+        const CGFloat dx = fabs(realPosition.x - lastPosition.x);
+        const CGFloat dy = fabs(realPosition.y - lastPosition.y);
+        const CGFloat delta = sqrt(pow(dx, 2) + pow(dy, 2));
 
-        CGFloat dx = fabs(realPosition.x - lastPosition.x);
-        CGFloat dy = fabs(realPosition.y - lastPosition.y);
-        CGFloat delta = sqrt(pow(dx, 2) + pow(dy, 2));
+        const NSInteger expectedFPS = 60;
+        const CFTimeInterval expectedDuration = 1.0 / expectedFPS;
+        const CFTimeInterval actualDuration = displayLink.duration;
+        const CGFloat normalizedDelta = delta * expectedDuration / actualDuration;
 
         // A rough approximation of a good looking blur. The larger the speed, the larger opacity of the blur layer.
-        CGFloat unboundedOpacity = log2(delta) / 5.0f;
+        const CGFloat unboundedOpacity = log2(normalizedDelta) / 5.0f;
         float opacity = (float)fmax(fmin(unboundedOpacity, 1.0), 0.0);
         self.ahk_blurLayer.opacity = opacity;
     }
