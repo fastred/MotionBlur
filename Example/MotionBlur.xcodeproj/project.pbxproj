@@ -62,7 +62,9 @@
 				A6E3925919784EDC00C02D47 /* AHKMotionBlur */,
 				A6E3925819784EDC00C02D47 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		A6E3925819784EDC00C02D47 /* Products */ = {
 			isa = PBXGroup;
