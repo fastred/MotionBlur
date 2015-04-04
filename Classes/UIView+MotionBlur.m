@@ -10,6 +10,7 @@
 
 #import "UIView+MotionBlur.h"
 #import "MotionBlurFilter.h"
+#import "UIView+AHKSnapshot.h"
 
 
 static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFloat angle)
@@ -101,7 +102,7 @@ static CGFloat opacityFromPositionDelta(CGFloat delta, CFTimeInterval tickDurati
 - (void)enableBlurWithAngle:(CGFloat)angle completion:(void (^)(void))completionBlock
 {
     // snapshot has to be performed on the main thread
-    UIImage *snapshotImage = [self layerSnapshot];
+    UIImage *snapshotImage = [self ahk_snapshot];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
@@ -115,13 +116,12 @@ static CGFloat opacityFromPositionDelta(CGFloat delta, CFTimeInterval tickDurati
             blurLayer.opacity = 0;
             blurLayer.frame = [self blurredLayerFrameWithBlurredImage:blurredImgRef];
             blurLayer.actions = @{ NSStringFromSelector(@selector(opacity)) : [NSNull null] };
+            CGImageRelease(blurredImgRef);
 
             [self.layer addSublayer:blurLayer];
             self.ahk_blurLayer = blurLayer;
 
             [self startDisplayLink];
-
-            CGImageRelease(blurredImgRef);
 
             if (completionBlock) {
                 completionBlock();
@@ -156,20 +156,6 @@ static CGFloat opacityFromPositionDelta(CGFloat delta, CFTimeInterval tickDurati
     CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
     [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     self.ahk_displayLink = displayLink;
-}
-
-- (UIImage *)layerSnapshot
-{
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);
-    CGContextRef graphicsContext = UIGraphicsGetCurrentContext();
-    CGContextFillRect(graphicsContext, self.bounds);
-
-    // good explanation of differences between drawViewHierarchyInRect:afterScreenUpdates: and renderInContext: https://github.com/radi/LiveFrost/issues/10#issuecomment-28959525
-    [self.layer renderInContext:graphicsContext];
-    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-
-    return snapshotImage;
 }
 
 - (void)tick:(CADisplayLink *)displayLink
