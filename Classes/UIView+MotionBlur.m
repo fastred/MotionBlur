@@ -27,6 +27,24 @@ static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFl
     return blurredImgRef;
 }
 
+static CGFloat positionDelta(CGPoint previousPosition, CGPoint currentPosition)
+{
+    const CGFloat dx = fabs(currentPosition.x - previousPosition.x);
+    const CGFloat dy = fabs(currentPosition.y - previousPosition.y);
+    return sqrt(pow(dx, 2) + pow(dy, 2));
+}
+
+static CGFloat opacityFromPositionDelta(CGFloat delta, CFTimeInterval tickDuration)
+{
+    const NSInteger expectedFPS = 60;
+    const CFTimeInterval expectedDuration = 1.0 / expectedFPS;
+    const CGFloat normalizedDelta = delta * expectedDuration / tickDuration;
+
+    // A rough approximation of an opacity for a good looking blur. The larger the delta (movement velocity), the larger opacity of the blur layer.
+    const CGFloat unboundedOpacity = log2(normalizedDelta) / 5.0f;
+    return (CGFloat)fmax(fmin(unboundedOpacity, 1.0), 0.0);
+}
+
 
 @interface UIView (MotionBlurProperties)
 
@@ -103,7 +121,7 @@ static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFl
             [self.layer addSublayer:blurLayer];
             self.ahk_blurLayer = blurLayer;
 
-            // CADisplayLink will run indefinitely, unless `-disableBlur` is called.
+            // WARNING: CADisplayLink will run indefinitely, unless `-disableBlur` is called.
             CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
             [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
             self.ahk_displayLink = displayLink;
@@ -134,31 +152,21 @@ static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFl
     [self.layer renderInContext:graphicsContext];
     UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+
     return snapshotImage;
 }
 
 - (void)tick:(CADisplayLink *)displayLink
 {
-    const CGPoint realPosition = ((CALayer *)self.layer.presentationLayer).position;
-    const CGPoint lastPosition = [self.ahk_lastPosition CGPointValue];
+    const CGPoint currentPosition = ((CALayer *)self.layer.presentationLayer).position;
+    const CGPoint previousPosition = [self.ahk_lastPosition CGPointValue];
 
     if (self.ahk_lastPosition) {
-        const CGFloat dx = fabs(realPosition.x - lastPosition.x);
-        const CGFloat dy = fabs(realPosition.y - lastPosition.y);
-        const CGFloat delta = sqrt(pow(dx, 2) + pow(dy, 2));
-
-        const NSInteger expectedFPS = 60;
-        const CFTimeInterval expectedDuration = 1.0 / expectedFPS;
-        const CFTimeInterval actualDuration = displayLink.duration;
-        const CGFloat normalizedDelta = delta * expectedDuration / actualDuration;
-
-        // A rough approximation of a good looking blur. The larger the speed, the larger opacity of the blur layer.
-        const CGFloat unboundedOpacity = log2(normalizedDelta) / 5.0f;
-        float opacity = (float)fmax(fmin(unboundedOpacity, 1.0), 0.0);
-        self.ahk_blurLayer.opacity = opacity;
+        const CGFloat delta = positionDelta(previousPosition, currentPosition);
+        self.ahk_blurLayer.opacity = opacityFromPositionDelta(delta, displayLink.duration);
     }
 
-    self.ahk_lastPosition = [NSValue valueWithCGPoint:realPosition];
+    self.ahk_lastPosition = [NSValue valueWithCGPoint:currentPosition];
 }
 
 @end
