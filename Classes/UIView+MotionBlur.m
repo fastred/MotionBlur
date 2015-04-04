@@ -101,7 +101,7 @@ static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFl
             CGSize difference = CGSizeMake(CGImageGetWidth(blurredImgRef) / scale - CGRectGetWidth(self.frame), CGImageGetHeight(blurredImgRef) / scale - CGRectGetHeight(self.frame));
             blurLayer.frame = CGRectInset(self.bounds, -difference.width / 2, -difference.height / 2);
 
-            blurLayer.actions = @{ @"opacity" : [NSNull null] };
+            blurLayer.actions = @{ NSStringFromSelector(@selector(opacity)) : [NSNull null] };
             [self.layer addSublayer:blurLayer];
             self.blurLayer = blurLayer;
 
