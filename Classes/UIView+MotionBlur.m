@@ -119,10 +119,7 @@ static CGFloat opacityFromPositionDelta(CGFloat delta, CFTimeInterval tickDurati
             [self.layer addSublayer:blurLayer];
             self.ahk_blurLayer = blurLayer;
 
-            // WARNING: CADisplayLink will run indefinitely, unless `-disableBlur` is called.
-            CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
-            [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-            self.ahk_displayLink = displayLink;
+            [self startDisplayLink];
 
             CGImageRelease(blurredImgRef);
 
@@ -150,6 +147,15 @@ static CGFloat opacityFromPositionDelta(CGFloat delta, CFTimeInterval tickDurati
     CGSize difference = CGSizeMake(CGImageGetWidth(blurredImgRef) / scale - CGRectGetWidth(self.frame), CGImageGetHeight(blurredImgRef) / scale - CGRectGetHeight(self.frame));
     CGRect blurLayerFrame = CGRectInset(self.bounds, -difference.width / 2, -difference.height / 2);
     return blurLayerFrame;
+}
+
+- (void)startDisplayLink
+{
+    // WARNING: CADisplayLink will run indefinitely, unless `-disableBlur` is called.
+
+    CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
+    [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+    self.ahk_displayLink = displayLink;
 }
 
 - (UIImage *)layerSnapshot
