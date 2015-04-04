@@ -30,51 +30,50 @@ static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFl
 
 @interface UIView (MotionBlurProperties)
 
-@property (weak, nonatomic) CALayer *blurLayer;
-@property (weak, nonatomic) CADisplayLink *displayLink;
-@property (nonatomic) NSValue *lastPosition; // CGPoint boxed in NSValue.
+@property (nonatomic, weak) CALayer *ahk_blurLayer;
+@property (nonatomic, weak) CADisplayLink *ahk_displayLink;
+@property (nonatomic, strong) NSValue *ahk_lastPosition; // CGPoint boxed in NSValue.
 
 @end
 
 
 @implementation UIView (MotionBlurProperties)
 
-@dynamic blurLayer;
-@dynamic displayLink;
-@dynamic lastPosition;
+@dynamic ahk_blurLayer;
+@dynamic ahk_displayLink;
+@dynamic ahk_lastPosition;
 
-- (void)setBlurLayer:(CALayer *)blurLayer
+- (void)setAhk_blurLayer:(CALayer *)ahk_blurLayer
 {
-    objc_setAssociatedObject(self, @selector(blurLayer), blurLayer, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(ahk_blurLayer), ahk_blurLayer, OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (CALayer *)blurLayer
+- (CALayer *)ahk_blurLayer
 {
-    return objc_getAssociatedObject(self, @selector(blurLayer));
+    return objc_getAssociatedObject(self, @selector(ahk_blurLayer));
 }
 
-- (void)setDisplayLink:(CADisplayLink *)displayLink
+- (void)setAhk_displayLink:(CADisplayLink *)ahk_displayLink
 {
-    objc_setAssociatedObject(self, @selector(displayLink), displayLink, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(ahk_displayLink), ahk_displayLink, OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (CADisplayLink *)displayLink
+- (CADisplayLink *)ahk_displayLink
 {
-    return objc_getAssociatedObject(self, @selector(displayLink));
+    return objc_getAssociatedObject(self, @selector(ahk_displayLink));
 }
 
-- (void)setLastPosition:(NSValue *)lastPosition
+- (void)setAhk_lastPosition:(NSValue *)ahk_lastPosition
 {
-    objc_setAssociatedObject(self, @selector(lastPosition), lastPosition, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(ahk_lastPosition), ahk_lastPosition, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSValue *)lastPosition
+- (NSValue *)ahk_lastPosition
 {
-    return objc_getAssociatedObject(self, @selector(lastPosition));
+    return objc_getAssociatedObject(self, @selector(ahk_lastPosition));
 }
 
 @end
-
 
 
 @implementation UIView (MotionBlur)
@@ -102,12 +101,12 @@ static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFl
 
             blurLayer.actions = @{ NSStringFromSelector(@selector(opacity)) : [NSNull null] };
             [self.layer addSublayer:blurLayer];
-            self.blurLayer = blurLayer;
+            self.ahk_blurLayer = blurLayer;
 
             // CADisplayLink will run indefinitely, unless `-disableBlur` is called.
             CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
             [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-            self.displayLink = displayLink;
+            self.ahk_displayLink = displayLink;
 
             CGImageRelease(blurredImgRef);
 
@@ -120,9 +119,9 @@ static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFl
 
 - (void)disableBlur
 {
-    [self.displayLink invalidate];
-    [self.blurLayer removeFromSuperlayer];
-    self.lastPosition = nil;
+    [self.ahk_displayLink invalidate];
+    [self.ahk_blurLayer removeFromSuperlayer];
+    self.ahk_lastPosition = nil;
 }
 
 - (UIImage *)layerSnapshot
@@ -141,9 +140,9 @@ static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFl
 - (void)tick:(CADisplayLink *)displayLink
 {
     CGPoint realPosition = ((CALayer *)self.layer.presentationLayer).position;
-    CGPoint lastPosition = [self.lastPosition CGPointValue];
+    CGPoint lastPosition = [self.ahk_lastPosition CGPointValue];
 
-    if (self.lastPosition) {
+    if (self.ahk_lastPosition) {
         // TODO: there's an assumption that the animation has constant FPS. The following code should also use a timestamp of the previous frame.
 
         CGFloat dx = fabs(realPosition.x - lastPosition.x);
@@ -153,10 +152,10 @@ static CGImageRef CGImageCreateByApplyingMotionBlur(UIImage *snapshotImage, CGFl
         // A rough approximation of a good looking blur. The larger the speed, the larger opacity of the blur layer.
         CGFloat unboundedOpacity = log2(delta) / 5.0f;
         float opacity = (float)fmax(fmin(unboundedOpacity, 1.0), 0.0);
-        self.blurLayer.opacity = opacity;
+        self.ahk_blurLayer.opacity = opacity;
     }
 
-    self.lastPosition = [NSValue valueWithCGPoint:realPosition];
+    self.ahk_lastPosition = [NSValue valueWithCGPoint:realPosition];
 }
 
 @end
