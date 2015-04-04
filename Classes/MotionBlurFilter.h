@@ -9,8 +9,8 @@
 #import <CoreImage/CoreImage.h>
 
 @interface MotionBlurFilter : CIFilter
-@property (strong, nonatomic) CIImage *inputImage;
-@property (strong, nonatomic) NSNumber *inputRadius;
-@property (strong, nonatomic) NSNumber *inputAngle;
-@property (strong, nonatomic) NSNumber *numSamples;
+@property (nonatomic, strong) CIImage *inputImage;
+@property (nonatomic, strong) NSNumber *inputRadius;
+@property (nonatomic, strong) NSNumber *inputAngle;
+@property (nonatomic, strong) NSNumber *numSamples;
 @end
